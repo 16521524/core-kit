@@ -1,0 +1,16 @@
+{
+  "name": "real-estate-core-ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/16521524/real-estate-core-ui"
+  },
+  "keywords": [],
+  "author": "warjamma",
+  "license": "MIT",
+  "description": "real-estate-core-ui"
+}
