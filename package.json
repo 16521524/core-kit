@@ -7,10 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/16521524/real-estate-core-ui"
+    "url": "git+https://github.com/16521524/real-estate-core-ui.git"
   },
-  "keywords": [],
+  "keywords": [
+    "real-estate-core-ui"
+  ],
   "author": "warjamma",
   "license": "MIT",
-  "description": "real-estate-core-ui"
+  "bugs": {
+    "url": "https://github.com/16521524/real-estate-core-ui/issues"
+  },
+  "homepage": "https://github.com/16521524/real-estate-core-ui#readme",
+  "description": ""
 }
