@@ -3,9 +3,7 @@ src/
 *.tsx
 tsconfig.json
 tsconfig.node.json
-vite.config.ts
 tailwind.config.js
-index.html
 node_modules/
 .git/
 .gitignore
