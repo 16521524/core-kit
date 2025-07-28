@@ -1,4 +1,3 @@
-
 # **Real Estate Core UI**
 
 A modern React component library built with  **TailwindCSS** ,  **TypeScript** , and  **Radix UI** .
@@ -92,14 +91,14 @@ import './index.css';
 git clone https://github.com/16521524/real-estate-core-ui.git
 cd real-estate-core-ui
 yarn install
-yarn dev
+yarn next dev
 
 ```
 
 ### Build the library
 
 ```
-yarn build
+yarn next build
 
 ```
 
