@@ -24,7 +24,7 @@
     "next:build": "next build",
     "next:start": "next start",
     "next:lint": "next lint",
-    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && cp src/styles.css dist/styles.css",
+    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && cp src/styles/styles.css dist/styles.css",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
