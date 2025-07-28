@@ -1,22 +1,62 @@
 {
   "name": "real-estate-core-ui",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "Real estate core ui",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build",
+    "dev": "vite",
+    "demo": "vite --open"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/16521524/real-estate-core-ui.git"
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.1.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
   },
   "keywords": [
-    "real-estate-core-ui"
+    "react",
+    "button",
+    "ui",
+    "components",
+    "tailwind",
+    "tailwindcss",
+    "typescript",
+    "design-system",
+    "library",
+    "ui-button",
+    "react-button"
   ],
   "author": "warjamma",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/16521524/real-estate-core-ui/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/16521524/eal-estate-core-ui.git"
   },
-  "homepage": "https://github.com/16521524/real-estate-core-ui#readme",
-  "description": ""
+  "homepage": "https://github.com/16521524/eal-estate-core-ui#readme",
+  "bugs": {
+    "url": "https://github.com/16521524/eal-estate-core-ui/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }
