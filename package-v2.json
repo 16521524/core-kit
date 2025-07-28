@@ -11,9 +11,7 @@
   },
   "description": "Real estate core UI - reusable components built with React, TailwindCSS, and Radix UI.",
   "main": "./dist/exports.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": "./dist/exports.js",
     "./client": "./dist/export-client.js"
@@ -23,7 +21,7 @@
     "next:build": "next build",
     "next:start": "next start",
     "next:lint": "next lint",
-    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom",
+    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
@@ -84,6 +82,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
