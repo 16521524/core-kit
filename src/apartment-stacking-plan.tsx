@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Grid, List, Table, Upload, Download, Plus, TrendingUp, TrendingDown } from "lucide-react"
+import dynamic from "next/dynamic"
 
 interface ApartmentUnit {
   code: string
@@ -109,7 +110,7 @@ const blockData = [
   { name: "C1", change: "+1.8%", total: 180, available: 108, sold: 72, trend: "up" },
 ]
 
-export default function Component() {
+export function Component() {
   const [viewMode, setViewMode] = useState<"grid" | "list" | "excel">("excel")
   const [selectedUnit, setSelectedUnit] = useState<ApartmentUnit | null>(null)
   const [priceType, setPriceType] = useState("vnd")
@@ -669,3 +670,5 @@ export default function Component() {
     </TooltipProvider>
   )
 }
+
+export default dynamic(() => Promise.resolve(Component), { ssr: false })
