@@ -1,1 +1,1 @@
-export * as CoreUserProfileStore from './exports';
+export * as CoreUi from './exports';

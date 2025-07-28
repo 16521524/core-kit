@@ -1,5 +1,5 @@
-import Component from "../apartment-stacking-plan";
+import { DynamicApartmentStackingPlan } from "@/sections";
 
 export default function Page() {
-  return <Component />
+  return <DynamicApartmentStackingPlan />
 }

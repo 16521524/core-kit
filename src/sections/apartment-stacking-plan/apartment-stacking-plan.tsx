@@ -110,7 +110,7 @@ const blockData = [
   { name: "C1", change: "+1.8%", total: 180, available: 108, sold: 72, trend: "up" },
 ]
 
-export function Component() {
+export function ApartmentStackingPlan() {
   const [viewMode, setViewMode] = useState<"grid" | "list" | "excel">("excel")
   const [selectedUnit, setSelectedUnit] = useState<ApartmentUnit | null>(null)
   const [priceType, setPriceType] = useState("vnd")
@@ -671,4 +671,7 @@ export function Component() {
   )
 }
 
-export default dynamic(() => Promise.resolve(Component), { ssr: false })
+export const DynamicApartmentStackingPlan = dynamic(
+  () => Promise.resolve(ApartmentStackingPlan),
+  { ssr: false }
+)
