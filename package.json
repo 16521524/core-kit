@@ -17,14 +17,14 @@
   "exports": {
     ".": "./dist/exports.js",
     "./client": "./dist/export-client.js",
-    "./styles.css": "./dist/styles.css"
+    "./styles/styles.css": "./dist/styles/styles.css"
   },
   "scripts": {
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",
     "next:lint": "next lint",
-    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && cp src/styles/styles.css dist/styles.css",
+    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && mkdir -p dist/styles && cp src/styles/styles.css dist/styles/styles.css",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
