@@ -646,7 +646,8 @@ export default function Component() {
           </div>
         </div>
       </div>
-      <style jsx global>{`
+      <style>{`
+      :global(body) {
         @keyframes scroll {
           0% {
             transform: translateX(0);
@@ -663,6 +664,7 @@ export default function Component() {
         .animate-scroll:hover {
           animation-play-state: paused;
         }
+      }
       `}</style>
     </TooltipProvider>
   )
