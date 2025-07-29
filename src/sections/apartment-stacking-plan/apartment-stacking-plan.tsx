@@ -48,7 +48,7 @@ const generateFloorData = (floorNumber: number, block: string) => {
   const views = ["City", "River", "Garden", "Mountain", "Park"]
 
   // Generate 10 units per floor for horizontal scroll
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 20; i++) {
     const unitCode = `L${floorNumber}${block}.${floorNumber}${String(i).padStart(2, "0")}`
     const basePrice = 2.5 + Math.random() * 1.5 // 2.5 - 4.0 tỷ
     const status = statuses[Math.floor(Math.random() * statuses.length)]
