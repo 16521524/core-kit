@@ -1,1 +1,2 @@
-export * from './apartment-stacking-plan';
+export * from './apartment-stacking-plan.section';
+export * from './apartment-stacking-plan.type';
