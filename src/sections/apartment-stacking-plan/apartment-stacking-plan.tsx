@@ -117,29 +117,29 @@ const themes = {
         "bg-gradient-to-br from-emerald-600/90 to-emerald-700/90 hover:from-emerald-500/90 hover:to-emerald-600/90 border-2 border-emerald-400/50 text-white shadow-lg backdrop-blur-sm",
       sold: "bg-gradient-to-br from-rose-600/90 to-rose-700/90 hover:from-rose-500/90 hover:to-rose-600/90 border-2 border-rose-400/50 text-white shadow-lg backdrop-blur-sm",
       booked:
-        "bg-gradient-to-br from-blue-600/90 to-blue-700/90 hover:from-blue-500/90 hover:to-blue-600/90 border-2 border-blue-400/50 text-white shadow-lg backdrop-blur-sm",
+        "bg-gradient-to-br from-yellow-600/90 to-yellow-700/90 hover:from-yellow-500/90 hover:to-yellow-600/90 border-2 border-yellow-400/50 text-white shadow-lg backdrop-blur-sm",
       special:
-        "bg-gradient-to-br from-violet-600/90 to-violet-700/90 hover:from-violet-500/90 hover:to-violet-600/90 border-2 border-violet-400/50 text-white shadow-lg backdrop-blur-sm",
+        "bg-gradient-to-br from-gray-600/90 to-gray-700/90 hover:from-gray-500/90 hover:to-gray-600/90 border-2 border-gray-400/50 text-white shadow-lg backdrop-blur-sm",
     },
 
     statusBadges: {
       available: "bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 font-semibold",
       sold: "bg-rose-500/20 text-rose-200 border border-rose-400/30 font-semibold",
       booked: "bg-blue-500/20 text-blue-200 border border-blue-400/30 font-semibold",
-      special: "bg-violet-500/20 text-violet-200 border border-violet-400/30 font-semibold",
+      special: "bg-gray-500/20 text-gray-200 border border-gray-400/30 font-semibold",
     },
 
     statusIndicators: {
       available: "bg-emerald-400 shadow-lg shadow-emerald-400/50",
       sold: "bg-rose-400 shadow-lg shadow-rose-400/50",
-      booked: "bg-blue-400 shadow-lg shadow-blue-400/50",
-      special: "bg-violet-400 shadow-lg shadow-violet-400/50",
+      booked: "bg-yellow-400 shadow-lg shadow-yellow-400/50",
+      special: "bg-gray-400 shadow-lg shadow-gray-400/50",
     },
 
     // Accent colors
-    accent: "bg-blue-600",
-    accentHover: "hover:bg-blue-700",
-    accentText: "text-blue-400",
+    accent: "bg-yellow-600",
+    accentHover: "hover:bg-yellow-700",
+    accentText: "text-yellow-400",
   },
 
   light: {
@@ -159,26 +159,28 @@ const themes = {
     // Enhanced status colors with better contrast
     statusColors: {
       available:
-        "bg-gradient-to-br from-emerald-200 to-emerald-300 hover:from-emerald-300 hover:to-emerald-400 border-2 border-emerald-400 text-emerald-900 shadow-lg",
-      sold: "bg-gradient-to-br from-rose-200 to-rose-300 hover:from-rose-300 hover:to-rose-400 border-2 border-rose-400 text-rose-900 shadow-lg",
+        "bg-gradient-to-br from-emerald-200 to-emerald-300 hover:from-emerald-400 hover:to-emerald-400 border-2 border-emerald-400 text-emerald-900 shadow-lg", // Xanh lá cây
+      sold:
+        "bg-gradient-to-br from-rose-200 to-rose-300 hover:from-rose-400 hover:to-rose-400 border-2 border-rose-400 text-rose-900 shadow-lg", // Đỏ
       booked:
-        "bg-gradient-to-br from-blue-200 to-blue-300 hover:from-blue-300 hover:to-blue-400 border-2 border-blue-400 text-blue-900 shadow-lg",
+        "bg-gradient-to-br from-yellow-200 to-yellow-300 hover:from-yellow-400 hover:to-yellow-400 border-2 border-yellow-400 text-yellow-900 shadow-lg", // Vàng
       special:
-        "bg-gradient-to-br from-violet-200 to-violet-300 hover:from-violet-300 hover:to-violet-400 border-2 border-violet-400 text-violet-900 shadow-lg",
+        "bg-gradient-to-br from-gray-200 to-gray-300 hover:from-gray-400 hover:to-gray-400 border-2 border-gray-400 text-gray-900 shadow-lg", // Xám
     },
+    
 
     statusBadges: {
-      available: "bg-emerald-300 text-emerald-900 border border-emerald-400 font-semibold",
-      sold: "bg-rose-300 text-rose-900 border border-rose-400 font-semibold",
-      booked: "bg-blue-300 text-blue-900 border border-blue-400 font-semibold",
-      special: "bg-violet-300 text-violet-900 border border-violet-400 font-semibold",
-    },
+      available: "bg-emerald-300 text-emerald-900 border border-emerald-400 font-semibold", // Xanh lá cây
+      sold: "bg-rose-300 text-rose-900 border border-rose-400 font-semibold",               // Đỏ
+      booked: "bg-yellow-300 text-yellow-900 border border-yellow-400 font-semibold",       // Vàng
+      special: "bg-gray-300 text-gray-900 border border-gray-400 font-semibold",            // Xám
+    },    
 
     statusIndicators: {
       available: "bg-emerald-600 shadow-lg shadow-emerald-600/40",
       sold: "bg-rose-600 shadow-lg shadow-rose-600/40",
-      booked: "bg-blue-600 shadow-lg shadow-blue-600/40",
-      special: "bg-violet-600 shadow-lg shadow-violet-600/40",
+      booked: "bg-yellow-600 shadow-lg shadow-yellow-600/40",
+      special: "bg-gray-600 shadow-lg shadow-gray-600/40",
     },
 
     accent: "bg-blue-600",
@@ -191,7 +193,7 @@ const statusLabels = {
   available: "Còn trống",
   sold: "Đã bán",
   booked: "Đã đặt cọc",
-  special: "Đặc biệt",
+  special: "Chưa setup",
 }
 
 const blockData = [
@@ -269,13 +271,21 @@ export function ApartmentStackingPlan() {
         {/* Navigation - Ultra Compact */}
         <div className={`${theme.secondary} ${theme.borderLight} border-b px-6 py-1.5 shadow-sm`}>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-8">
-              <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1">
+              {/* <div className="flex items-center gap-1">
                 <div className={`w-2 h-2 rounded-full ${theme.accent}`} />
                 <span className={`${theme.textMuted} text-sm font-medium`}>Property Management</span>
+              </div> */}
+              <div className="flex items-center gap-1">
+                <img src="https://cdn.primetek.ai/cdn/logo_dxfuture.png" alt="DX FutureTech Logo" className="h-6 object-contain" />
               </div>
               <div className="flex items-center gap-6">
-                <span
+              <span
+                  className={`${theme.textMuted} text-sm font-medium hover:${theme.textSecondary} px-2 cursor-pointer transition-colors`}
+                >
+                  Stacking Plan
+                </span>
+                {/* <span
                   className={`${theme.accentText} text-sm font-semibold border-b-2 ${theme.accentText.replace("text-", "border-")} pb-1 px-2 cursor-pointer transition-colors`}
                 >
                   Stacking Plan
@@ -299,7 +309,7 @@ export function ApartmentStackingPlan() {
                   className={`${theme.textMuted} text-sm font-medium hover:${theme.textSecondary} px-2 cursor-pointer transition-colors`}
                 >
                   Reports
-                </span>
+                </span> */}
               </div>
             </div>
 
@@ -377,13 +387,13 @@ export function ApartmentStackingPlan() {
                                       : "text-amber-400"
                                 }`}
                               >
-                                {block.change}
+                                {/* {block.change} */}
                               </span>
-                              {block.trend === "up" && <TrendingUp className="w-4 h-4 text-emerald-400" />}
-                              {block.trend === "down" && <TrendingDown className="w-4 h-4 text-rose-400" />}
-                              {block.trend === "neutral" && (
+                              {/* {block.trend === "up" && <TrendingUp className="w-4 h-4 text-emerald-400" />}
+                              {block.trend === "down" && <TrendingDown className="w-4 h-4 text-rose-400" />} */}
+                              {/* {block.trend === "neutral" && (
                                 <div className="w-4 h-4 border border-amber-400 rounded-sm"></div>
-                              )}
+                              )} */}
                             </div>
                           </div>
 
@@ -577,7 +587,7 @@ export function ApartmentStackingPlan() {
                 }`}
               >
                 <Table className="w-3.5 h-3.5 mr-1.5" />
-                Excel
+                Matrix
                 {viewMode === "excel" && (
                   <div className="absolute -bottom-0.5 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
                 )}
@@ -722,7 +732,7 @@ export function ApartmentStackingPlan() {
                             side="top"
                             className={
                               isDarkMode
-                                ? "bg-slate-800 border-slate-600 shadow-lg"
+                                ? "text-white bg-slate-800 border-slate-600 shadow-lg"
                                 : "bg-white border-gray-300 text-gray-900 shadow-lg"
                             }
                           >
