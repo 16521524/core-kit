@@ -44,7 +44,7 @@ const generateFloorData = (floorNumber: number, block: string) => {
   const views = ["City", "River", "Garden", "Mountain", "Park"]
 
   // Generate 10 units per floor for horizontal scroll
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 20; i++) {
     const unitCode = `L${floorNumber}${block}.${floorNumber}${String(i).padStart(2, "0")}`
     const basePrice = 2.5 + Math.random() * 1.5 // 2.5 - 4.0 tỷ
     const status = statuses[Math.floor(Math.random() * statuses.length)]
@@ -104,6 +104,16 @@ for (let floor = 25; floor >= 10; floor--) {
 // Block M3 - floors 5-20
 for (let floor = 20; floor >= 5; floor--) {
   mockData.push(generateFloorData(floor, "M3"))
+}
+
+// Block B1 - floors 15-30
+for (let floor = 30; floor >= 15; floor--) {
+  mockData.push(generateFloorData(floor, "B1"))
+}
+
+// Block B2 - floors 15-30
+for (let floor = 30; floor >= 15; floor--) {
+  mockData.push(generateFloorData(floor, "B2"))
 }
 
 // Replace the themes object with enhanced light theme contrast:
