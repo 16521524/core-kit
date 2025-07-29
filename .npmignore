@@ -1,0 +1,10 @@
+src/
+*.ts
+*.tsx
+tsconfig.json
+tsconfig.node.json
+tailwind.config.js
+node_modules/
+.git/
+.gitignore
+README.md
