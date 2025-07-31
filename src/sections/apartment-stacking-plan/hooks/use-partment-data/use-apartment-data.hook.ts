@@ -41,6 +41,8 @@ interface BlockData {
   trend: "up" | "down" | "neutral"
 }
 
+export type { ApartmentUnit, Floor, BlockData }
+
 // Generate mock units based on metadata structure
 function generateMockUnitsFromMetadata(blockMetadata: any, selectedBlock: any) {
   const mockUnits: any[] = []

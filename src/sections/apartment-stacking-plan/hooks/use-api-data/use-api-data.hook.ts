@@ -78,6 +78,8 @@ interface ApiResponse<T> {
   }
 }
 
+export type { ApiProject, ApiBlock, ApiUnit, BlockMetadata }
+
 const API_BASE_URL = "https://ai-gate-dev.aurora-tech.com/stacking-plan-service/api/v1"
 // const API_BASE_URL = "http://192.168.11.102:3000/api/v1"
 
