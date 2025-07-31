@@ -40,10 +40,10 @@ function EmptyCell({ viewMode, theme }: { viewMode: string; theme: any }) {
   if (viewMode === "excel") {
     return (
       <div
-        className={`w-36 ${theme.border} border-r last:border-r-0 p-1 min-w-[144px] max-w-[144px] flex items-center justify-center`}
+        className={`w-28 ${theme.border} border-r last:border-r-0 p-1 min-w-[112px] max-w-[112px] flex items-center justify-center`}
       >
         <div className="w-full h-full bg-transparent border-2 border-dashed border-gray-300/30 rounded-xl flex items-center justify-center">
-          <div className="text-gray-400/50 text-xs font-medium">Empty</div>
+          {/* <div className="text-gray-400/50 text-xs font-medium">Empty</div> */}
         </div>
       </div>
     )
@@ -88,7 +88,7 @@ export function UnitCard({ unit, floor, theme, isDarkMode, priceType, statusLabe
             <TooltipTrigger asChild>
               <DialogTrigger asChild>
                 <div
-                  className={`w-36 ${theme.border} border-r last:border-r-0 p-1 min-w-[144px] max-w-[144px] flex items-center justify-center`}
+                  className={`w-28 ${theme.border} border-r last:border-r-0 p-1 min-w-[112px] max-w-[112px] flex items-center justify-center`}
                 >
                   <div
                     className={`w-full h-full cursor-pointer transition-all duration-300 ${theme.statusColors[unit.status]} relative group hover:shadow-2xl hover:scale-[1.02] hover:z-10 rounded-xl p-2 flex flex-col items-center justify-center`}

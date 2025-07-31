@@ -35,7 +35,7 @@ export function LoadingSkeleton({ viewMode, theme, isDarkMode }: LoadingSkeleton
               {Array.from({ length: unitsPerFloor }).map((_, index) => (
                 <div
                   key={`header-skeleton-${index}`}
-                  className={`p-3 w-36 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[144px] max-w-[144px]`}
+                  className={`p-3 w-28 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[112px] max-w-[112px]`}
                 >
                   <div
                     className={`h-4 w-16 rounded mb-1 ${isDarkMode ? "bg-slate-700 animate-pulse" : "bg-gray-200 animate-pulse"}`}

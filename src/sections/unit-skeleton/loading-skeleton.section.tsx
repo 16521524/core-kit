@@ -12,7 +12,7 @@ export function UnitSkeleton({ viewMode, theme, isDarkMode }: UnitSkeletonProps)
   if (viewMode === "excel") {
     return (
       <div
-        className={`w-36 ${theme.border} border-r last:border-r-0 p-1 min-w-[144px] max-w-[144px] flex items-center justify-center`}
+        className={`w-28 ${theme.border} border-r last:border-r-0 p-1 min-w-[112px] max-w-[112px] flex items-center justify-center`}
       >
         <div
           className={`w-full h-full rounded-xl p-2 flex flex-col items-center justify-center space-y-2 ${skeletonBase}`}

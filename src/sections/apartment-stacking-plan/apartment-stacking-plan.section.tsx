@@ -640,7 +640,7 @@ export function ApartmentStackingPlan() {
           <LoadingSkeleton viewMode={viewMode} theme={theme} isDarkMode={isDarkMode} />
         ) : viewMode === "excel" ? (
           // Excel-style Stacking Plan with Fixed Headers
-          <div className={`relative ${theme.primary} h-[calc(100vh-200px)] overflow-auto`}>
+          <div className={`relative ${theme.primary} h-[calc(100vh-375px)] overflow-auto`}>
             <div className="min-w-max">
               {/* Fixed Header - Both Vertical and Horizontal Scroll */}
               <div className={`sticky top-0 z-30 ${theme.secondary} ${theme.borderLight} border-b shadow-sm`}>
@@ -657,17 +657,17 @@ export function ApartmentStackingPlan() {
                   {blockMetadata?.unit_numbers.map((unitInfo, index) => (
                     <div
                       key={`${unitInfo.number}-${index}`}
-                      className={`p-3 w-36 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[144px] max-w-[144px]`}
+                      className={`p-3 w-28 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[112px] max-w-[112px]`}
                     >
                       <div className={`font-semibold text-sm ${theme.textPrimary}`}>{unitInfo.number}</div>
                       <div className={`text-xs ${theme.textMuted} font-medium`}>{unitInfo.direction}</div>
                     </div>
                   )) ||
-                    // Fallback headers if no metadata
+                    // Fallback hea1ders if no metadata
                     Array.from({ length: 12 }).map((_, index) => (
                       <div
                         key={`fallback-${index}`}
-                        className={`p-3 w-36 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[144px] max-w-[144px]`}
+                        className={`p-3 w-28 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[112px] max-w-[112px]`}
                       >
                         <div className={`font-semibold text-sm ${theme.textPrimary}`}>
                           {String(index + 1).padStart(2, "0")}
@@ -685,7 +685,7 @@ export function ApartmentStackingPlan() {
                 {filteredData.map((floor, floorIndex) => (
                   <div
                     key={`${floor.block}-${floor.number}`}
-                    className={`flex min-h-[120px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
+                    className={`flex min-h-[95px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
                       floorIndex % 2 === 0
                         ? isDarkMode
                           ? "bg-slate-800/50"
@@ -697,7 +697,7 @@ export function ApartmentStackingPlan() {
                   >
                     {/* Fixed Floor Column */}
                     <div
-                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[120px]`}
+                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[95px]`}
                     >
                       <div className={`font-bold text-lg ${theme.textPrimary}`}>
                         {floor.floorString || floor.number}
@@ -726,7 +726,7 @@ export function ApartmentStackingPlan() {
           </div>
         ) : viewMode === "list" ? (
           // List View
-          <div className={`${theme.primary} h-[calc(100vh-200px)] overflow-auto`}>
+          <div className={`${theme.primary} h-[calc(100vh-275px)] overflow-auto`}>
             <div className={`sticky top-0 z-20 ${theme.secondary} ${theme.borderLight} border-b px-6 py-4 shadow-sm`}>
               <div className={`grid grid-cols-12 gap-4 text-sm font-medium ${theme.textMuted}`}>
                 <div className="col-span-2">Unit Code</div>
@@ -760,7 +760,7 @@ export function ApartmentStackingPlan() {
           </div>
         ) : (
           // Grid View
-          <div className={`p-6 ${theme.primary} h-[calc(100vh-200px)] overflow-auto`}>
+          <div className={`p-6 ${theme.primary} h-[calc(100vh-275px)] overflow-auto`}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
               {filteredData.flatMap((floor) =>
                 floor.units

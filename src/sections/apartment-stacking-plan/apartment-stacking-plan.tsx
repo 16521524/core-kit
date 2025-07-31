@@ -650,7 +650,7 @@ export function ApartmentStackingPlan() {
                   {filteredData[0]?.units.map((_, index) => (
                     <div
                       key={index}
-                      className={`p-3 w-36 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[144px] max-w-[144px]`}
+                      className={`p-3 w-28 text-center ${theme.border} border-r last:border-r-0 ${theme.secondary} flex flex-col items-center justify-center min-w-[112px] max-w-[112px]`}
                     >
                       <div className={`font-semibold text-sm ${theme.textPrimary}`}>
                         Unit {String(index + 1).padStart(2, "0")}
@@ -668,7 +668,7 @@ export function ApartmentStackingPlan() {
                 {filteredData.map((floor, floorIndex) => (
                   <div
                     key={`${floor.block}-${floor.number}`}
-                    className={`flex min-h-[120px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
+                    className={`flex min-h-[95px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
                       floorIndex % 2 === 0
                         ? isDarkMode
                           ? "bg-slate-800/50"
@@ -680,7 +680,7 @@ export function ApartmentStackingPlan() {
                   >
                     {/* Fixed Floor Column */}
                     <div
-                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[120px]`}
+                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[95px]`}
                     >
                       <div className={`font-bold text-lg ${theme.textPrimary}`}>F{floor.number}</div>
                       <div className="text-xs text-emerald-500 font-medium">{floor.availableCount} units</div>
@@ -694,7 +694,7 @@ export function ApartmentStackingPlan() {
                           <TooltipTrigger asChild>
                             <DialogTrigger asChild>
                               <div
-                                className={`w-36 ${theme.border} border-r last:border-r-0 p-1 min-w-[144px] max-w-[144px] flex items-center justify-center`}
+                                className={`w-28 ${theme.border} border-r last:border-r-0 p-1 min-w-[112px] max-w-[112px] flex items-center justify-center`}
                               >
                                 <div
                                   className={`w-full h-full cursor-pointer transition-all duration-300 ${theme.statusColors[unit.status]} relative group hover:shadow-2xl hover:scale-[1.02] hover:z-10 rounded-xl p-2 flex flex-col items-center justify-center`}

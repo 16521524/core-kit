@@ -21,10 +21,10 @@ export function FloorSkeleton({
 
   if (viewMode === "excel") {
     return (
-      <div className={`flex min-h-[120px] ${isDarkMode ? "bg-slate-800/30" : "bg-gray-50/30"} transition-colors`}>
+      <div className={`flex min-h-[95px] ${isDarkMode ? "bg-slate-800/30" : "bg-gray-50/30"} transition-colors`}>
         {/* Fixed Floor Column Skeleton */}
         <div
-          className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[120px]`}
+          className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[95px]`}
         >
           <div className={`h-6 w-8 rounded mb-1 ${skeletonBase}`} />
           <div className={`h-3 w-16 rounded mb-1 ${skeletonBase}`} />
