@@ -4,109 +4,128 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { DollarSign } from "lucide-react"
-
-interface ApartmentUnit {
-  code: string
-  price: string
-  priceUSD: string
-  status: "available" | "sold" | "booked" | "unavailable"
-  area: string
-  bedrooms: number
-  bathrooms: number
-  view: string
-  block: string
-  isApproved?: boolean
-  isLocked?: boolean
-  isBlocked?: boolean
-  buyer?: {
-    name: string
-    phone: string
-    createDate: string
-    buyerStatus: "interested" | "deposited" | "contracted" | "completed"
-  }
-}
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { DollarSign, TrendingUp } from "lucide-react"
 
 interface PriceManagementProps {
-  unit: ApartmentUnit
+  unit: {
+    code: string
+    price: string
+    priceUSD: string
+    status: string
+  }
   theme: any
   isDarkMode: boolean
 }
 
 export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProps) {
-  const [isEditingPrice, setIsEditingPrice] = useState(false)
-  const [tempPrice, setTempPrice] = useState("")
-  const [tempPriceUSD, setTempPriceUSD] = useState("")
+  const [priceType, setPriceType] = useState("selling")
+  const [currency, setCurrency] = useState("VND")
+  const [newPrice, setNewPrice] = useState("3500000000")
 
-  const updateUnitPrice = (unitCode: string, newPrice: string, newPriceUSD: string) => {
-    // In real app, this would call an API
-    console.log(`Updating price for ${unitCode}: ${newPrice} / ${newPriceUSD}`)
-    setIsEditingPrice(false)
-    setTempPrice("")
-    setTempPriceUSD("")
+  const formatPrice = (price: string, currency: string) => {
+    const numPrice = Number.parseInt(price.replace(/[^\d]/g, ""))
+    if (currency === "VND") {
+      return (numPrice / 1000000000).toFixed(1) + " tỷ"
+    } else {
+      return "$" + Math.round(numPrice / 24000).toLocaleString()
+    }
   }
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>Quản lý giá</Label>
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => {
-            setIsEditingPrice(!isEditingPrice)
-            setTempPrice(unit.price)
-            setTempPriceUSD(unit.priceUSD)
-          }}
-          className={`${isDarkMode ? "border-slate-600 text-slate-300 hover:bg-slate-700" : "border-gray-300 text-gray-700 hover:bg-gray-50"}`}
-        >
-          <DollarSign className="w-4 h-4 mr-1" />
-          {isEditingPrice ? "Hủy" : "Sửa giá"}
-        </Button>
-      </div>
-
-      {isEditingPrice ? (
-        <div className="space-y-3 p-3 rounded-lg border border-blue-500/30 bg-blue-500/5">
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <Label className={`text-xs ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>Giá VND</Label>
-              <Input
-                value={tempPrice}
-                onChange={(e) => setTempPrice(e.target.value)}
-                placeholder="3.5 tỷ"
-                className={`${isDarkMode ? "bg-slate-700 border-slate-600 text-white placeholder-slate-400" : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"}`}
-              />
-            </div>
-            <div>
-              <Label className={`text-xs ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>Giá USD</Label>
-              <Input
-                value={tempPriceUSD}
-                onChange={(e) => setTempPriceUSD(e.target.value)}
-                placeholder="$150,000"
-                className={`${isDarkMode ? "bg-slate-700 border-slate-600 text-white placeholder-slate-400" : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"}`}
-              />
-            </div>
-          </div>
-          <Button
-            size="sm"
-            onClick={() => updateUnitPrice(unit.code, tempPrice, tempPriceUSD)}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-          >
-            Cập nhật giá
-          </Button>
-        </div>
-      ) : (
+    <Card className={`${isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-200"}`}>
+      <CardHeader>
+        <CardTitle className={`text-lg flex items-center gap-2 ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
+          <DollarSign className="w-5 h-5" />
+          Quản lý giá - {unit.code}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Price Type Selection */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="font-bold text-lg text-green-500">{unit.price}</div>
-            <div className={`text-xs ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>Giá VND</div>
+            <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Loại giá</Label>
+            <Select value={priceType} onValueChange={setPriceType}>
+              <SelectTrigger
+                className={`${
+                  isDarkMode ? "bg-slate-600 border-slate-500 text-slate-100" : "bg-white border-gray-300 text-gray-900"
+                }`}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className={`${isDarkMode ? "bg-slate-600 border-slate-500" : "bg-white border-gray-300"}`}>
+                <SelectItem value="selling">Giá bán</SelectItem>
+                <SelectItem value="listing">Giá niêm yết</SelectItem>
+                <SelectItem value="cost">Giá gốc</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
+
           <div>
-            <div className="font-bold text-lg text-blue-500">{unit.priceUSD}</div>
-            <div className={`text-xs ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>Giá USD</div>
+            <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>
+              Đơn vị tiền tệ
+            </Label>
+            <Select value={currency} onValueChange={setCurrency}>
+              <SelectTrigger
+                className={`${
+                  isDarkMode ? "bg-slate-600 border-slate-500 text-slate-100" : "bg-white border-gray-300 text-gray-900"
+                }`}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className={`${isDarkMode ? "bg-slate-600 border-slate-500" : "bg-white border-gray-300"}`}>
+                <SelectItem value="VND">VND</SelectItem>
+                <SelectItem value="USD">USD</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
-      )}
-    </div>
+
+        {/* New Price Input */}
+        <div>
+          <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Giá mới</Label>
+          <Input
+            type="text"
+            value={newPrice}
+            onChange={(e) => setNewPrice(e.target.value)}
+            placeholder="Nhập giá mới"
+            className={`${
+              isDarkMode
+                ? "bg-slate-600 border-slate-500 text-slate-100 placeholder-slate-400"
+                : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+            }`}
+          />
+        </div>
+
+        {/* Price Preview */}
+        <div className={`p-4 rounded-lg ${isDarkMode ? "bg-slate-600" : "bg-gray-50"}`}>
+          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"} mb-2`}>Xem trước giá:</div>
+          <div className={`text-lg font-bold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
+            Giá hiện tại: {formatPrice(unit.price, "VND")}
+          </div>
+          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>Giá USD: {unit.priceUSD}</div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 pt-4">
+          <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" onClick={() => console.log("Save price")}>
+            <TrendingUp className="w-4 h-4 mr-2" />
+            Lưu giá
+          </Button>
+          <Button
+            variant="outline"
+            className={`flex-1 ${
+              isDarkMode
+                ? "border-slate-500 text-slate-300 hover:bg-slate-600"
+                : "border-gray-300 text-gray-700 hover:bg-gray-50"
+            }`}
+            onClick={() => setNewPrice(unit.price.replace(/[^\d]/g, ""))}
+          >
+            Hủy
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

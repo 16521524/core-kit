@@ -30,13 +30,29 @@ interface ApartmentUnit {
 
 interface Floor {
   number: number
-  units: ApartmentUnit[]
+  units: (ApartmentUnit | null)[]
   availableCount: number
   block: string
 }
 
+// Add this before the main UnitCard component
+function EmptyCell({ viewMode, theme }: { viewMode: string; theme: any }) {
+  if (viewMode === "excel") {
+    return (
+      <div
+        className={`w-36 ${theme.border} border-r last:border-r-0 p-1 min-w-[144px] max-w-[144px] flex items-center justify-center`}
+      >
+        <div className="w-full h-full bg-transparent border-2 border-dashed border-gray-300/30 rounded-xl flex items-center justify-center">
+          <div className="text-gray-400/50 text-xs font-medium">Empty</div>
+        </div>
+      </div>
+    )
+  }
+  return null
+}
+
 interface UnitCardProps {
-  unit: ApartmentUnit
+  unit: ApartmentUnit | null
   floor: Floor
   theme: any
   isDarkMode: boolean
@@ -59,6 +75,11 @@ const getUnitIcon = (unit: ApartmentUnit) => {
 }
 
 export function UnitCard({ unit, floor, theme, isDarkMode, priceType, statusLabels, viewMode }: UnitCardProps) {
+  // If unit is null, render empty cell
+  if (!unit) {
+    return <EmptyCell viewMode={viewMode} theme={theme} />
+  }
+
   return (
     <TooltipProvider>
       {viewMode === "excel" && (

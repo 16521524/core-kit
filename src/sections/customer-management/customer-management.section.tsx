@@ -5,139 +5,126 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { UserPlus } from "lucide-react"
-
-interface ApartmentUnit {
-  code: string
-  price: string
-  priceUSD: string
-  status: "available" | "sold" | "booked" | "unavailable"
-  area: string
-  bedrooms: number
-  bathrooms: number
-  view: string
-  block: string
-  isApproved?: boolean
-  isLocked?: boolean
-  isBlocked?: boolean
-  buyer?: {
-    name: string
-    phone: string
-    createDate: string
-    buyerStatus: "interested" | "deposited" | "contracted" | "completed"
-  }
-}
+import { Users, Phone, Calendar, UserPlus } from "lucide-react"
 
 interface CustomerManagementProps {
-  unit: ApartmentUnit
+  unit: {
+    code: string
+    buyer?: {
+      name: string
+      phone: string
+      createDate: string
+      buyerStatus: "interested" | "deposited" | "contracted" | "completed"
+    }
+  }
   theme: any
   isDarkMode: boolean
 }
 
 export function CustomerManagement({ unit, theme, isDarkMode }: CustomerManagementProps) {
-  const [isAddingBuyer, setIsAddingBuyer] = useState(false)
-  const [buyerForm, setBuyerForm] = useState({
-    name: "",
-    phone: "",
-    buyerStatus: "interested" as const,
-  })
+  const [customerName, setCustomerName] = useState(unit.buyer?.name || "")
+  const [customerPhone, setCustomerPhone] = useState(unit.buyer?.phone || "")
+  const [customerStatus, setCustomerStatus] = useState(unit.buyer?.buyerStatus || "interested")
 
-  const addBuyer = (unitCode: string, buyerInfo: typeof buyerForm) => {
-    console.log(`Adding buyer for ${unitCode}:`, buyerInfo)
-    setIsAddingBuyer(false)
-    setBuyerForm({ name: "", phone: "", buyerStatus: "interested" })
+  const statusLabels = {
+    interested: "Quan tâm",
+    deposited: "Đã đặt cọc",
+    contracted: "Đã ký hợp đồng",
+    completed: "Hoàn thành",
+  }
+
+  const statusColors = {
+    interested: "bg-yellow-500",
+    deposited: "bg-blue-500",
+    contracted: "bg-green-500",
+    completed: "bg-emerald-500",
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className={`text-lg font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>Quản lý khách hàng</h3>
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => setIsAddingBuyer(!isAddingBuyer)}
-          className={`${isDarkMode ? "border-slate-600 text-slate-300 hover:bg-slate-700" : "border-gray-300 text-gray-700 hover:bg-gray-50"}`}
-        >
-          <UserPlus className="w-4 h-4 mr-2" />
-          {isAddingBuyer ? "Hủy" : "Thêm khách hàng"}
-        </Button>
-      </div>
-
-      {unit.buyer && (
-        <div
-          className={`p-4 rounded-lg border border-green-500/30 ${isDarkMode ? "bg-green-900/20" : "bg-green-500/5"}`}
-        >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div>
-              <Label className={`text-xs ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>Tên khách hàng</Label>
-              <div className={`font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>{unit.buyer.name}</div>
+    <Card className={`${isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-200"}`}>
+      <CardHeader>
+        <CardTitle className={`text-lg flex items-center gap-2 ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
+          <Users className="w-5 h-5" />
+          Quản lý khách hàng - {unit.code}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Current Customer Info */}
+        {unit.buyer ? (
+          <div className={`p-4 rounded-lg ${isDarkMode ? "bg-slate-600" : "bg-gray-50"}`}>
+            <div className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"} mb-3`}>
+              Thông tin khách hàng hiện tại:
             </div>
-            <div>
-              <Label className={`text-xs ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>Số điện thoại</Label>
-              <div className={`font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>{unit.buyer.phone}</div>
-            </div>
-            <div>
-              <Label className={`text-xs ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>Ngày tạo</Label>
-              <div className={`font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
-                {unit.buyer.createDate}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span className={`font-medium ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
+                  {unit.buyer.name}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                <span className={`${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>{unit.buyer.phone}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                <span className={`${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>{unit.buyer.createDate}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge className={`${statusColors[unit.buyer.buyerStatus]} text-white`}>
+                  {statusLabels[unit.buyer.buyerStatus]}
+                </Badge>
               </div>
             </div>
-            <div>
-              <Label className={`text-xs ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>Trạng thái KH</Label>
-              <Badge
-                className={`${
-                  unit.buyer.buyerStatus === "completed"
-                    ? isDarkMode
-                      ? "bg-green-900/50 text-green-300 border-green-700"
-                      : "bg-green-100 text-green-800"
-                    : unit.buyer.buyerStatus === "contracted"
-                      ? isDarkMode
-                        ? "bg-blue-900/50 text-blue-300 border-blue-700"
-                        : "bg-blue-100 text-blue-800"
-                      : unit.buyer.buyerStatus === "deposited"
-                        ? isDarkMode
-                          ? "bg-amber-900/50 text-amber-300 border-amber-700"
-                          : "bg-amber-100 text-amber-800"
-                        : isDarkMode
-                          ? "bg-gray-700 text-gray-300 border-gray-600"
-                          : "bg-gray-100 text-gray-800"
-                } text-xs`}
-              >
-                {unit.buyer.buyerStatus === "completed"
-                  ? "Hoàn thành"
-                  : unit.buyer.buyerStatus === "contracted"
-                    ? "Đã ký HĐ"
-                    : unit.buyer.buyerStatus === "deposited"
-                      ? "Đã cọc"
-                      : "Quan tâm"}
-              </Badge>
+          </div>
+        ) : (
+          <div
+            className={`p-4 rounded-lg border-2 border-dashed ${
+              isDarkMode ? "border-slate-600 bg-slate-600/30" : "border-gray-300 bg-gray-50"
+            }`}
+          >
+            <div className={`text-center ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>
+              <UserPlus className="w-8 h-8 mx-auto mb-2" />
+              <div>Chưa có khách hàng</div>
+              <div className="text-sm">Thêm thông tin khách hàng quan tâm</div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {isAddingBuyer && (
-        <div
-          className={`p-4 rounded-lg border border-blue-500/30 space-y-4 ${isDarkMode ? "bg-blue-900/20" : "bg-blue-500/5"}`}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Customer Form */}
+        <div className="space-y-4">
+          <div className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>
+            {unit.buyer ? "Cập nhật thông tin:" : "Thêm khách hàng mới:"}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Tên khách hàng *</Label>
+              <Label className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Tên khách hàng</Label>
               <Input
-                value={buyerForm.name}
-                onChange={(e) => setBuyerForm({ ...buyerForm, name: e.target.value })}
-                placeholder="Nguyễn Văn A"
-                className={`${isDarkMode ? "bg-slate-700 border-slate-600 text-white placeholder-slate-400" : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"}`}
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
+                placeholder="Nhập tên khách hàng"
+                className={`${
+                  isDarkMode
+                    ? "bg-slate-600 border-slate-500 text-slate-100 placeholder-slate-400"
+                    : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                }`}
               />
             </div>
+
             <div>
-              <Label className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Số điện thoại *</Label>
+              <Label className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Số điện thoại</Label>
               <Input
-                value={buyerForm.phone}
-                onChange={(e) => setBuyerForm({ ...buyerForm, phone: e.target.value })}
-                placeholder="0912345678"
-                className={`${isDarkMode ? "bg-slate-700 border-slate-600 text-white placeholder-slate-400" : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"}`}
+                value={customerPhone}
+                onChange={(e) => setCustomerPhone(e.target.value)}
+                placeholder="Nhập số điện thoại"
+                className={`${
+                  isDarkMode
+                    ? "bg-slate-600 border-slate-500 text-slate-100 placeholder-slate-400"
+                    : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                }`}
               />
             </div>
           </div>
@@ -146,16 +133,15 @@ export function CustomerManagement({ unit, theme, isDarkMode }: CustomerManageme
             <Label className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>
               Trạng thái khách hàng
             </Label>
-            <Select
-              value={buyerForm.buyerStatus}
-              onValueChange={(value) => setBuyerForm({ ...buyerForm, buyerStatus: value as any })}
-            >
+            <Select value={customerStatus} onValueChange={setCustomerStatus}>
               <SelectTrigger
-                className={`${isDarkMode ? "bg-slate-700 border-slate-600 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+                className={`${
+                  isDarkMode ? "bg-slate-600 border-slate-500 text-slate-100" : "bg-white border-gray-300 text-gray-900"
+                }`}
               >
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className={isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-300"}>
+              <SelectContent className={`${isDarkMode ? "bg-slate-600 border-slate-500" : "bg-white border-gray-300"}`}>
                 <SelectItem value="interested">Quan tâm</SelectItem>
                 <SelectItem value="deposited">Đã đặt cọc</SelectItem>
                 <SelectItem value="contracted">Đã ký hợp đồng</SelectItem>
@@ -164,15 +150,52 @@ export function CustomerManagement({ unit, theme, isDarkMode }: CustomerManageme
             </Select>
           </div>
 
-          <Button
-            onClick={() => addBuyer(unit.code, buyerForm)}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-            disabled={!buyerForm.name || !buyerForm.phone}
-          >
-            Thêm khách hàng
-          </Button>
+          {/* Action Buttons */}
+          <div className="flex gap-3 pt-4">
+            <Button
+              className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+              onClick={() => console.log("Save customer")}
+            >
+              <UserPlus className="w-4 h-4 mr-2" />
+              {unit.buyer ? "Cập nhật" : "Thêm khách hàng"}
+            </Button>
+            <Button
+              variant="outline"
+              className={`flex-1 ${
+                isDarkMode
+                  ? "border-slate-500 text-slate-300 hover:bg-slate-600"
+                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+              onClick={() => {
+                setCustomerName(unit.buyer?.name || "")
+                setCustomerPhone(unit.buyer?.phone || "")
+                setCustomerStatus(unit.buyer?.buyerStatus || "interested")
+              }}
+            >
+              Hủy
+            </Button>
+          </div>
         </div>
-      )}
-    </div>
+
+        {/* Customer History */}
+        <div className={`p-4 rounded-lg ${isDarkMode ? "bg-slate-600" : "bg-gray-50"}`}>
+          <div className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"} mb-3`}>
+            Lịch sử tương tác:
+          </div>
+          <div className="space-y-2 text-sm">
+            <div className={`flex justify-between ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>
+              <span>Khách hàng quan tâm</span>
+              <span>30/07/2025 09:15</span>
+            </div>
+            {customerStatus !== "interested" && (
+              <div className={`flex justify-between ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>
+                <span>Đặt cọc</span>
+                <span>30/07/2025 14:30</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
