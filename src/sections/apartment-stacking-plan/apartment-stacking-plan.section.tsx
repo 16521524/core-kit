@@ -141,7 +141,7 @@ const statusLabels = {
 export function ApartmentStackingPlan() {
   const [viewMode, setViewMode] = useState<"grid" | "list" | "excel">("excel")
   const [priceType, setPriceType] = useState("vnd")
-  const [isDarkMode, setIsDarkMode] = useState(true)
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   // Use the new apartment data hook
   const {
