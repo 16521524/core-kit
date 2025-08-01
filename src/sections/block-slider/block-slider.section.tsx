@@ -282,7 +282,7 @@ export function BlockSlider({
                             isActive ? "text-white/80" : isDarkMode ? "text-slate-300" : "text-gray-600"
                           }`}
                         >
-                          căn
+                          apartment
                         </div>
                       </div>
 
@@ -297,7 +297,7 @@ export function BlockSlider({
                             isActive ? "text-white/80" : isDarkMode ? "text-slate-300" : "text-gray-600"
                           }`}
                         >
-                          trống
+                          empty
                         </div>
                       </div>
                     </div>

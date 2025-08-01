@@ -50,7 +50,7 @@ const generateFloorData = (floorNumber: number, block: string) => {
   // Generate 10 units per floor for horizontal scroll
   for (let i = 1; i <= 20; i++) {
     const unitCode = `L${floorNumber}${block}.${floorNumber}${String(i).padStart(2, "0")}`
-    const basePrice = 2.5 + Math.random() * 1.5 // 2.5 - 4.0 tỷ
+    const basePrice = 2.5 + Math.random() * 1.5 // 2.5 - 4.0 billion
     const status = statuses[Math.floor(Math.random() * statuses.length)]
     const area = 65 + Math.floor(Math.random() * 25) // 65-90m²
     const bedrooms = Math.random() > 0.3 ? 2 : 3
@@ -59,7 +59,7 @@ const generateFloorData = (floorNumber: number, block: string) => {
 
     units.push({
       code: unitCode,
-      price: `${basePrice.toFixed(1)} tỷ`,
+      price: `${basePrice.toFixed(1)} billion`,
       priceUSD: `$${Math.floor(basePrice * 41000)}`,
       status,
       area: `${area}m²`,
@@ -190,10 +190,10 @@ const themes = {
 }
 
 const statusLabels = {
-  available: "Còn trống",
-  sold: "Đã bán",
-  booked: "Đã đặt cọc",
-  special: "Chưa setup",
+  available: "Available",
+  sold: "Sold",
+  booked: "Booked",
+  special: "Unavailable",
 }
 
 const blockData = [
@@ -400,11 +400,11 @@ export function ApartmentStackingPlan() {
                           <div className="grid grid-cols-2 gap-2 text-sm">
                             <div className="text-center">
                               <div className="font-bold text-lg">{block.total}</div>
-                              <div className="text-xs opacity-80">căn</div>
+                              <div className="text-xs opacity-80">apartment</div>
                             </div>
                             <div className="text-center">
                               <div className="font-bold text-lg text-emerald-400">{block.available}</div>
-                              <div className="text-xs opacity-80">trống</div>
+                              <div className="text-xs opacity-80">empty</div>
                             </div>
                           </div>
 
@@ -470,7 +470,7 @@ export function ApartmentStackingPlan() {
                 <SelectTrigger
                   className={`w-44 h-8 ${isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-300"} text-sm shadow-sm`}
                 >
-                  <SelectValue placeholder="Chọn dự án" />
+                  <SelectValue placeholder="Chọn Project" />
                 </SelectTrigger>
                 <SelectContent className={isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-300"}>
                   <SelectItem value="sunrise-city">Sunrise City</SelectItem>
@@ -668,7 +668,7 @@ export function ApartmentStackingPlan() {
                 {filteredData.map((floor, floorIndex) => (
                   <div
                     key={`${floor.block}-${floor.number}`}
-                    className={`flex min-h-[95px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
+                    className={`flex min-h-[110px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
                       floorIndex % 2 === 0
                         ? isDarkMode
                           ? "bg-slate-800/50"
@@ -680,7 +680,7 @@ export function ApartmentStackingPlan() {
                   >
                     {/* Fixed Floor Column */}
                     <div
-                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[95px]`}
+                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[110px]`}
                     >
                       <div className={`font-bold text-lg ${theme.textPrimary}`}>F{floor.number}</div>
                       <div className="text-xs text-emerald-500 font-medium">{floor.availableCount} units</div>
@@ -751,12 +751,12 @@ export function ApartmentStackingPlan() {
                           className={`${isDarkMode ? "bg-slate-800 border-slate-600 text-white" : "bg-white border-gray-300 text-gray-900"} shadow-xl`}
                         >
                           <DialogHeader>
-                            <DialogTitle className="text-lg font-semibold">Chi tiết căn hộ {unit.code}</DialogTitle>
+                            <DialogTitle className="text-lg font-semibold">Chi tiết apartment hộ {unit.code}</DialogTitle>
                           </DialogHeader>
                           <div className="grid gap-6 mt-4">
                             <div className="grid grid-cols-2 gap-4">
                               <div>
-                                <label className={`text-sm font-medium ${theme.textMuted}`}>Mã căn hộ</label>
+                                <label className={`text-sm font-medium ${theme.textMuted}`}>Mã apartment hộ</label>
                                 <div className="font-mono font-semibold mt-1">{unit.code}</div>
                               </div>
                               <div>
@@ -886,12 +886,12 @@ export function ApartmentStackingPlan() {
                             className={`${isDarkMode ? "bg-slate-800 border-slate-600 text-white" : "bg-white border-gray-300 text-gray-900"} shadow-xl`}
                           >
                             <DialogHeader>
-                              <DialogTitle className="text-lg font-semibold">Chi tiết căn hộ {unit.code}</DialogTitle>
+                              <DialogTitle className="text-lg font-semibold">Chi tiết apartment hộ {unit.code}</DialogTitle>
                             </DialogHeader>
                             <div className="grid gap-6 mt-4">
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <label className={`text-sm font-medium ${theme.textMuted}`}>Mã căn hộ</label>
+                                  <label className={`text-sm font-medium ${theme.textMuted}`}>Mã apartment hộ</label>
                                   <div className="font-mono font-semibold mt-1">{unit.code}</div>
                                 </div>
                                 <div>
@@ -1007,12 +1007,12 @@ export function ApartmentStackingPlan() {
                       className={`${isDarkMode ? "bg-slate-800 border-slate-600 text-white" : "bg-white border-gray-300 text-gray-900"} shadow-xl`}
                     >
                       <DialogHeader>
-                        <DialogTitle className="text-lg font-semibold">Chi tiết căn hộ {unit.code}</DialogTitle>
+                        <DialogTitle className="text-lg font-semibold">Chi tiết apartment hộ {unit.code}</DialogTitle>
                       </DialogHeader>
                       <div className="grid gap-6 mt-4">
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className={`text-sm font-medium ${theme.textMuted}`}>Mã căn hộ</label>
+                            <label className={`text-sm font-medium ${theme.textMuted}`}>Mã apartment hộ</label>
                             <div className="font-mono font-semibold mt-1">{unit.code}</div>
                           </div>
                           <div>
@@ -1065,23 +1065,23 @@ export function ApartmentStackingPlan() {
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-8">
               <div className="font-medium">
-                Tổng căn: <span className={`font-bold ${theme.accentText}`}>{currentBlockData?.total || 0}</span>
+                Total: <span className={`font-bold ${theme.accentText}`}>{currentBlockData?.total || 0}</span>
               </div>
               <div className="font-medium">
-                Còn trống: <span className="font-bold text-emerald-500">{currentBlockData?.available || 0}</span>
+                Available: <span className="font-bold text-emerald-500">{currentBlockData?.available || 0}</span>
               </div>
               <div className="font-medium">
-                Đã bán: <span className="font-bold text-rose-500">{currentBlockData?.sold || 0}</span>
+                Sold: <span className="font-bold text-rose-500">{currentBlockData?.sold || 0}</span>
               </div>
               <div className="font-medium">
-                Block hiện tại: <span className={`font-bold ${theme.accentText}`}>BLOCK {selectedBlock}</span>
+                Current block: <span className={`font-bold ${theme.accentText}`}>BLOCK {selectedBlock}</span>
               </div>
               <div className="font-medium">
-                Số tầng: <span className="font-bold text-amber-500">{filteredData.length}</span>
+                Number of floors: <span className="font-bold text-amber-500">{filteredData.length}</span>
               </div>
             </div>
             <div className={`${theme.textMuted} font-medium`}>
-              Cập nhật lần cuối: {new Date().toLocaleString("vi-VN")}
+              Last updated: {new Date().toLocaleString("vi-VN")}
             </div>
           </div>
         </div>

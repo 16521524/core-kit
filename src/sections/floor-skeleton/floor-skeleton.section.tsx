@@ -24,7 +24,7 @@ export function FloorSkeleton({
       <div className={`flex min-h-[110px] ${isDarkMode ? "bg-slate-800/30" : "bg-gray-50/30"} transition-colors`}>
         {/* Fixed Floor Column Skeleton */}
         <div
-          className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[95px]`}
+          className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[110px]`}
         >
           <div className={`h-6 w-8 rounded mb-1 ${skeletonBase}`} />
           <div className={`h-3 w-16 rounded mb-1 ${skeletonBase}`} />

@@ -77,7 +77,7 @@ export function generateMockDataFromMetadata(blockMetadata: BlockMetadata): Floo
 
       // Base price increases with floor
       const floorMultiplier = 1 + (floorNum - 1) * 0.01 // 1% increase per floor
-      const basePrice = (2.5 + Math.random() * 1.5) * floorMultiplier // 2.5 - 4.0 tỷ
+      const basePrice = (2.5 + Math.random() * 1.5) * floorMultiplier // 2.5 - 4.0 billion
 
       const area = 50 + Math.floor(Math.random() * 30) // 50-80m²
       const bedrooms = Math.random() > 0.3 ? (Math.random() > 0.5 ? 2 : 3) : 1
@@ -104,7 +104,7 @@ export function generateMockDataFromMetadata(blockMetadata: BlockMetadata): Floo
 
       units.push({
         code: unitCode,
-        price: `${basePrice.toFixed(1)} tỷ`,
+        price: `${basePrice.toFixed(1)} billion`,
         priceUSD: `$${Math.floor(basePrice * 41000)}`,
         status,
         area: `${area}m²`,

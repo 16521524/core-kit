@@ -34,10 +34,10 @@ interface AdminDialogProps {
 }
 
 const statusLabels = {
-  available: "Còn trống",
-  sold: "Đã bán",
-  booked: "Đã đặt cọc",
-  unavailable: "Chưa mở bán",
+  available: "Available",
+  sold: "Sold",
+  booked: "Booked",
+  unavailable: "Unavailable",
 }
 
 export function AdminDialog({ unit, theme, isDarkMode }: AdminDialogProps) {
@@ -52,7 +52,7 @@ export function AdminDialog({ unit, theme, isDarkMode }: AdminDialogProps) {
           className={`text-xl font-bold flex items-center gap-2 ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}
         >
           <Building className="w-5 h-5" />
-          Chi tiết căn hộ {unit.code}
+          Apartment Unit Details {unit.code}
         </DialogTitle>
       </DialogHeader>
 
@@ -64,23 +64,23 @@ export function AdminDialog({ unit, theme, isDarkMode }: AdminDialogProps) {
       >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div>
-            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Diện tích:</span>
+            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Area:</span>
             <div className={`font-semibold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>{unit.area}</div>
           </div>
           <div>
-            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Phòng ngủ:</span>
+            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Bedrooms:</span>
             <div className={`font-semibold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
-              {unit.bedrooms} phòng
+              {unit.bedrooms} rooms
             </div>
           </div>
           <div>
-            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Phòng tắm:</span>
+            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Bathrooms:</span>
             <div className={`font-semibold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
-              {unit.bathrooms} phòng
+              {unit.bathrooms} rooms
             </div>
           </div>
           <div>
-            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Trạng thái:</span>
+            <span className={`block text-xs ${isDarkMode ? "text-slate-400" : "text-gray-600"}`}>Status:</span>
             <Badge className={`${theme.statusBadges[unit.status]} mt-1`}>{statusLabels[unit.status]}</Badge>
           </div>
         </div>
@@ -102,7 +102,7 @@ export function AdminDialog({ unit, theme, isDarkMode }: AdminDialogProps) {
             }`}
           >
             <DollarSign className="w-4 h-4" />
-            Quản lý giá
+            Price Management
           </TabsTrigger>
           <TabsTrigger
             value="workflow"
@@ -124,7 +124,7 @@ export function AdminDialog({ unit, theme, isDarkMode }: AdminDialogProps) {
             }`}
           >
             <Users className="w-4 h-4" />
-            Khách hàng
+            Customer
           </TabsTrigger>
         </TabsList>
 

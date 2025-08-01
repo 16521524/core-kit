@@ -41,10 +41,10 @@ export function CustomerManagement({
   );
 
   const statusLabels = {
-    interested: "Quan tâm",
-    deposited: "Đã đặt cọc",
-    contracted: "Đã ký hợp đồng",
-    completed: "Hoàn thành",
+    interested: "Interested",
+    deposited: "Booked",
+    contracted: "Contracted",
+    completed: "Completed",
   };
 
   const statusColors = {
@@ -69,7 +69,7 @@ export function CustomerManagement({
           }`}
         >
           <Users className="w-5 h-5" />
-          Quản lý khách hàng - {unit.code}
+          Customer Management - {unit.code}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -85,7 +85,7 @@ export function CustomerManagement({
                 isDarkMode ? "text-slate-300" : "text-gray-700"
               } mb-3`}
             >
-              Thông tin khách hàng hiện tại:
+              Current customer info:
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
@@ -143,8 +143,8 @@ export function CustomerManagement({
               }`}
             >
               <UserPlus className="w-8 h-8 mx-auto mb-2" />
-              <div>Chưa có khách hàng</div>
-              <div className="text-sm">Thêm thông tin khách hàng quan tâm</div>
+              <div>No customer yet</div>
+              <div className="text-sm">Add interested customer information</div>
             </div>
           </div>
         )}
@@ -156,7 +156,7 @@ export function CustomerManagement({
               isDarkMode ? "text-slate-300" : "text-gray-700"
             }`}
           >
-            {unit.buyer ? "Cập nhật thông tin:" : "Thêm khách hàng mới:"}
+            {unit.buyer ? "Update information:" : "Add new customer:"}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -166,12 +166,12 @@ export function CustomerManagement({
                   isDarkMode ? "text-slate-300" : "text-gray-700"
                 }`}
               >
-                Tên khách hàng
+                Customer Name
               </Label>
               <Input
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                placeholder="Nhập tên khách hàng"
+                placeholder="Enter customer name"
                 className={`${
                   isDarkMode
                     ? "bg-slate-600 border-slate-500 text-slate-100 placeholder-slate-400"
@@ -186,12 +186,12 @@ export function CustomerManagement({
                   isDarkMode ? "text-slate-300" : "text-gray-700"
                 }`}
               >
-                Số điện thoại
+                Phone Number
               </Label>
               <Input
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                placeholder="Nhập số điện thoại"
+                placeholder="Enter phone number"
                 className={`${
                   isDarkMode
                     ? "bg-slate-600 border-slate-500 text-slate-100 placeholder-slate-400"
@@ -207,7 +207,7 @@ export function CustomerManagement({
                 isDarkMode ? "text-slate-300" : "text-gray-700"
               }`}
             >
-              Trạng thái khách hàng
+              Customer Status
             </Label>
             <Select
               value={customerStatus}
@@ -237,10 +237,10 @@ export function CustomerManagement({
                     : "bg-white border-gray-300"
                 }`}
               >
-                <SelectItem value="interested">Quan tâm</SelectItem>
-                <SelectItem value="deposited">Đã đặt cọc</SelectItem>
-                <SelectItem value="contracted">Đã ký hợp đồng</SelectItem>
-                <SelectItem value="completed">Hoàn thành</SelectItem>
+                <SelectItem value="interested">Interested</SelectItem>
+                <SelectItem value="deposited">Booked</SelectItem>
+                <SelectItem value="contracted">Contracted</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -252,7 +252,7 @@ export function CustomerManagement({
               onClick={() => console.log("Save customer")}
             >
               <UserPlus className="w-4 h-4 mr-2" />
-              {unit.buyer ? "Cập nhật" : "Thêm khách hàng"}
+              {unit.buyer ? "Update" : "Add Customer"}
             </Button>
             <Button
               variant="outline"
@@ -267,7 +267,7 @@ export function CustomerManagement({
                 setCustomerStatus(unit.buyer?.buyerStatus || "interested");
               }}
             >
-              Hủy
+              Cancel
             </Button>
           </div>
         </div>
@@ -283,7 +283,7 @@ export function CustomerManagement({
               isDarkMode ? "text-slate-300" : "text-gray-700"
             } mb-3`}
           >
-            Lịch sử tương tác:
+            Interaction History:
           </div>
           <div className="space-y-2 text-sm">
             <div
@@ -291,7 +291,7 @@ export function CustomerManagement({
                 isDarkMode ? "text-slate-300" : "text-gray-600"
               }`}
             >
-              <span>Khách hàng quan tâm</span>
+              <span>Customer showed interest</span>
               <span>30/07/2025 09:15</span>
             </div>
             {customerStatus !== "interested" && (
@@ -300,7 +300,7 @@ export function CustomerManagement({
                   isDarkMode ? "text-slate-300" : "text-gray-600"
                 }`}
               >
-                <span>Đặt cọc</span>
+                <span>Booked</span>
                 <span>30/07/2025 14:30</span>
               </div>
             )}

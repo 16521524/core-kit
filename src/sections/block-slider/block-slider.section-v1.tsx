@@ -115,11 +115,11 @@ export function BlockSlider({
                       <div className="grid grid-cols-2 gap-2 text-sm">
                         <div className="text-center">
                           <div className="font-bold text-lg">{block.total}</div>
-                          <div className="text-xs opacity-80">căn</div>
+                          <div className="text-xs opacity-80">apartment</div>
                         </div>
                         <div className="text-center">
                           <div className="font-bold text-lg text-emerald-400">{block.available}</div>
-                          <div className="text-xs opacity-80">trống</div>
+                          <div className="text-xs opacity-80">empty</div>
                         </div>
                       </div>
 

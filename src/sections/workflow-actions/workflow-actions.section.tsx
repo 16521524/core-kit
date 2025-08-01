@@ -28,10 +28,10 @@ export function WorkflowActions({ unit, theme, isDarkMode }: WorkflowActionsProp
   const workflowStep = getWorkflowStep()
 
   const workflowSteps = [
-    { key: "setup", label: "Thiết lập giá", icon: Settings, color: "gray" },
-    { key: "approved", label: "Đã duyệt", icon: CheckCircle, color: "blue" },
-    { key: "locked", label: "Đã khóa", icon: Lock, color: "green" },
-    { key: "blocked", label: "Bị chặn", icon: Ban, color: "red" },
+    { key: "setup", label: "Setup Price", icon: Settings, color: "gray" },
+    { key: "approved", label: "Approved", icon: CheckCircle, color: "blue" },
+    { key: "locked", label: "Locked", icon: Lock, color: "green" },
+    { key: "blocked", label: "Blocked", icon: Ban, color: "red" },
   ]
 
   return (
@@ -45,7 +45,7 @@ export function WorkflowActions({ unit, theme, isDarkMode }: WorkflowActionsProp
       <CardContent className="space-y-4">
         {/* Current Status */}
         <div className={`p-4 rounded-lg ${isDarkMode ? "bg-slate-600" : "bg-gray-50"}`}>
-          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"} mb-2`}>Trạng thái hiện tại:</div>
+          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"} mb-2`}>Current status:</div>
           <div className="flex items-center gap-2">
             {workflowSteps.map((step) => {
               const Icon = step.icon
@@ -126,35 +126,35 @@ export function WorkflowActions({ unit, theme, isDarkMode }: WorkflowActionsProp
         {/* Action Buttons */}
         <div className="space-y-3">
           <div className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>
-            Hành động có thể thực hiện:
+            Available Actions:
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             {workflowStep === "setup" && (
               <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => console.log("Approve unit")}>
                 <CheckCircle className="w-4 h-4 mr-2" />
-                Duyệt
+                Approve
               </Button>
             )}
 
             {workflowStep === "approved" && (
               <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={() => console.log("Lock unit")}>
                 <Lock className="w-4 h-4 mr-2" />
-                Khóa
+                Lock
               </Button>
             )}
 
             {(workflowStep === "setup" || workflowStep === "approved") && (
               <Button variant="destructive" onClick={() => console.log("Block unit")}>
                 <Ban className="w-4 h-4 mr-2" />
-                Chặn
+                Block
               </Button>
             )}
 
             {workflowStep === "blocked" && (
               <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => console.log("Unblock unit")}>
                 <CheckCircle className="w-4 h-4 mr-2" />
-                Bỏ chặn
+                Unblock
               </Button>
             )}
           </div>
@@ -163,22 +163,22 @@ export function WorkflowActions({ unit, theme, isDarkMode }: WorkflowActionsProp
         {/* Workflow History */}
         <div className={`p-4 rounded-lg ${isDarkMode ? "bg-slate-600" : "bg-gray-50"}`}>
           <div className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"} mb-3`}>
-            Lịch sử workflow:
+            Workflow History:
           </div>
           <div className="space-y-2 text-sm">
             <div className={`flex justify-between ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>
-              <span>Tạo căn hộ</span>
+              <span>Apartment created</span>
               <span>25/07/2025 12:01</span>
             </div>
             {unit.isApproved && (
               <div className={`flex justify-between ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>
-                <span>Đã duyệt</span>
+                <span>Approved</span>
                 <span>25/07/2025 14:30</span>
               </div>
             )}
             {unit.isLocked && (
               <div className={`flex justify-between ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>
-                <span>Đã khóa</span>
+                <span>Locked</span>
                 <span>25/07/2025 16:15</span>
               </div>
             )}

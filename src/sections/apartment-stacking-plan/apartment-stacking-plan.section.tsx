@@ -132,10 +132,10 @@ const themes = {
 }
 
 const statusLabels = {
-  available: "Còn trống",
-  sold: "Đã bán",
-  booked: "Đã đặt cọc",
-  unavailable: "Chưa mở bán",
+  available: "Available",
+  sold: "Sold",
+  booked: "Booked",
+  unavailable: "Unavailable",
 }
 
 export function ApartmentStackingPlan() {
@@ -197,7 +197,7 @@ export function ApartmentStackingPlan() {
                   <div className={`w-2 h-2 rounded-full ${theme.accent}`} />
                   <span className={`${theme.textMuted} text-sm font-medium`}>Property Management</span>
                 </div>
-                <div className="flex items-center gap-6">
+                {/* <div className="flex items-center gap-6">
                   <span
                     className={`${theme.accentText} text-sm font-semibold border-b-2 ${theme.accentText.replace("text-", "border-")} pb-1 px-2 cursor-pointer transition-colors`}
                   >
@@ -223,7 +223,7 @@ export function ApartmentStackingPlan() {
                   >
                     Reports
                   </span>
-                </div>
+                </div> */}
               </div>
 
               {/* Theme Toggle */}
@@ -341,9 +341,9 @@ export function ApartmentStackingPlan() {
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-1">
                 <div className={`w-2 h-2 rounded-full ${theme.accent}`} />
-                <span className={`${theme.textMuted} text-sm font-medium`}>Property Management</span>
+                <span className={`${theme.textMuted} text-sm font-medium`}>Stacking plan</span>
               </div>
-              <div className="flex items-center gap-6">
+              {/* <div className="flex items-center gap-6">
                 <span
                   className={`${theme.accentText} text-sm font-semibold border-b-2 ${theme.accentText.replace("text-", "border-")} pb-1 px-2 cursor-pointer transition-colors`}
                 >
@@ -369,7 +369,7 @@ export function ApartmentStackingPlan() {
                 >
                   Reports
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {/* Theme Toggle */}
@@ -438,7 +438,7 @@ export function ApartmentStackingPlan() {
                   <SelectTrigger
                     className={`w-44 h-8 ${isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-300"} text-sm shadow-sm`}
                   >
-                    <SelectValue placeholder="Chọn dự án" />
+                    <SelectValue placeholder="Chọn Project" />
                   </SelectTrigger>
                   <SelectContent className={isDarkMode ? "bg-slate-700 border-slate-600" : "bg-white border-gray-300"}>
                     {projects.map((project) => (
@@ -450,7 +450,7 @@ export function ApartmentStackingPlan() {
                 </Select>
 
                 {/* Search Input */}
-                <div className="relative">
+                {/* <div className="relative">
                   <input
                     type="text"
                     placeholder="Search units..."
@@ -499,7 +499,7 @@ export function ApartmentStackingPlan() {
                     <SelectItem value="vnd">VND Price</SelectItem>
                     <SelectItem value="usd">USD Price</SelectItem>
                   </SelectContent>
-                </Select>
+                </Select> */}
               </div>
 
               {/* Right Side - Import/Export */}
@@ -685,7 +685,7 @@ export function ApartmentStackingPlan() {
                 {filteredData.map((floor, floorIndex) => (
                   <div
                     key={`${floor.block}-${floor.number}`}
-                    className={`flex min-h-[95px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
+                    className={`flex min-h-[110px] ${isDarkMode ? "hover:bg-slate-700/30" : "hover:bg-gray-50/50"} transition-colors ${
                       floorIndex % 2 === 0
                         ? isDarkMode
                           ? "bg-slate-800/50"
@@ -697,7 +697,7 @@ export function ApartmentStackingPlan() {
                   >
                     {/* Fixed Floor Column */}
                     <div
-                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[95px]`}
+                      className={`sticky left-0 z-20 ${theme.secondary} ${theme.border} border-r p-3 w-32 flex flex-col items-center justify-center min-h-[110px]`}
                     >
                       <div className={`font-bold text-lg ${theme.textPrimary}`}>
                         {floor.floorString || floor.number}
@@ -787,36 +787,36 @@ export function ApartmentStackingPlan() {
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-8">
               <div className="font-medium">
-                Dự án: <span className={`font-bold ${theme.accentText}`}>{selectedProject?.name || "N/A"}</span>
+                Project: <span className={`font-bold ${theme.accentText}`}>{selectedProject?.name || "N/A"}</span>
               </div>
               <div className="font-medium">
-                Tổng căn: <span className={`font-bold ${theme.accentText}`}>{blockMetadata?.total_units || 0}</span>
+                Total: <span className={`font-bold ${theme.accentText}`}>{blockMetadata?.total_units || 0}</span>
               </div>
               <div className="font-medium">
-                Còn trống:{" "}
+                Available:{" "}
                 <span className="font-bold text-emerald-500">
                   {blocks.find((b) => b.id === selectedBlockId)?.available || 0}
                 </span>
               </div>
               <div className="font-medium">
-                Đã bán:{" "}
+                Sold:{" "}
                 <span className="font-bold text-rose-500">
-                  {blocks.find((b) => b.id === selectedBlockId)?.sole || 0}
+                  {blocks.find((b) => b.id === selectedBlockId)?.sold || 0}
                 </span>
               </div>
               <div className="font-medium">
-                Block hiện tại:{" "}
+                Current block:{" "}
                 <span className={`font-bold ${theme.accentText}`}>
                   BLOCK {blocks.find((b) => b.id === selectedBlockId)?.name || "A"}
                 </span>
               </div>
               <div className="font-medium">
-                Số tầng:{" "}
+                Number of floors:{" "}
                 <span className="font-bold text-amber-500">{blockMetadata?.total_floors || filteredData.length}</span>
               </div>
             </div>
             <div className={`${theme.textMuted} font-medium`}>
-              Cập nhật lần cuối: {new Date().toLocaleString("vi-VN")}
+              Last updated: {new Date().toLocaleString("vi-VN")}
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ interface ApiBlock {
   description: string
   created_at: string
   available: number
-  sole: number
+  sold: number
 }
 
 interface ApiUnit {
@@ -123,7 +123,7 @@ export function useApiData() {
         id: "a4d5fce2-361a-40bf-96f9-721a52d7bff7",
         name: "The Tresor",
         location: "39 Bến Vân Đồn, Q4, TP.HCM",
-        description: "Dự án gồm 3 block, view sông, trung tâm thành phố",
+        description: "Project gồm 3 block, view sông, trung tâm thành phố",
         created_at: "2025-07-25T04:53:41.622Z",
       }
 
@@ -138,7 +138,7 @@ export function useApiData() {
           description: "Block A view Đông Nam",
           created_at: "2025-07-25T04:55:31.836Z",
           available: 48,
-          sole: 5,
+          sold: 5,
         },
         {
           id: "7106f059-644c-4a35-9754-16d5b9cb5b9d",
@@ -149,7 +149,7 @@ export function useApiData() {
           description: "Block B view Đông Bắc",
           created_at: "2025-07-25T04:55:31.836Z",
           available: 80,
-          sole: 70,
+          sold: 70,
         },
         {
           id: "7106f059-644c-4a35-9754-16d5b9cb5b9e",
@@ -160,7 +160,7 @@ export function useApiData() {
           description: "Block C view Đông Tây",
           created_at: "2025-07-25T04:55:31.836Z",
           available: 120,
-          sole: 30,
+          sold: 30,
         },
       ]
 

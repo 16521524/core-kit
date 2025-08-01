@@ -2,6 +2,7 @@
 
 import { useMemo } from "react"
 import { useApiData } from "../use-api-data"
+import { useExchangeRate } from "../use-exchange-rate"
 
 interface ApartmentUnit {
   code: string
@@ -55,7 +56,7 @@ function generateMockUnitsFromMetadata(blockMetadata: any, selectedBlock: any) {
       if (Math.random() < 0.15) return // 15% chance to skip
 
       const unitCode = `${selectedBlock.name}-${floor}-${unitInfo.number}`
-      const basePrice = (2.5 + Math.random() * 2.5) * 1000000000 // 2.5-5 tỷ
+      const basePrice = (2.5 + Math.random() * 2.5) * 1000000000 // 2.5-5 billion
       const area = 50 + Math.floor(Math.random() * 40) // 50-90m²
 
       mockUnits.push({
@@ -105,6 +106,8 @@ export function useApartmentData() {
     setSelectedBlockId,
   } = useApiData()
 
+  const exchangeRate = useExchangeRate("VND", "USD")
+
   // Convert API data to component format
   const processedData = useMemo(() => {
     console.log("🔍 DEBUG - useApartmentData processedData:")
@@ -141,7 +144,7 @@ export function useApartmentData() {
         change: changePercent >= 0 ? `+${changePercent.toFixed(1)}%` : `${changePercent.toFixed(1)}%`,
         total: block.num_units,
         available: block.available,
-        sold: block.sole,
+        sold: block.sold,
         trend: trend as "up" | "down" | "neutral",
       }
     })
@@ -170,8 +173,10 @@ export function useApartmentData() {
       unitsToProcess.forEach((unit, index) => {
         const apartmentUnit: ApartmentUnit = {
           code: unit.code,
-          price: `${(unit.price / 1000000000).toFixed(1)} tỷ`,
-          priceUSD: `$${Math.floor(unit.price / 25000).toLocaleString()}`,
+          price: `${(unit.price / 1000000000).toFixed(1)} billion`,
+          priceUSD: exchangeRate
+          ? `$${Math.round(unit.price * exchangeRate).toLocaleString()}`
+          : "Updating...",
           status: unit.status,
           area: `${unit.area}m²`,
           bedrooms: unit.num_bedrooms,

@@ -27,7 +27,7 @@ export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProp
   const formatPrice = (price: string, currency: string) => {
     const numPrice = Number.parseInt(price.replace(/[^\d]/g, ""))
     if (currency === "VND") {
-      return (numPrice / 1000000000).toFixed(1) + " tỷ"
+      return (numPrice / 1_000_000_000).toFixed(1) + " billion"
     } else {
       return "$" + Math.round(numPrice / 24000).toLocaleString()
     }
@@ -38,14 +38,14 @@ export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProp
       <CardHeader>
         <CardTitle className={`text-lg flex items-center gap-2 ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
           <DollarSign className="w-5 h-5" />
-          Quản lý giá - {unit.code}
+          Price Management - {unit.code}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Price Type Selection */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Loại giá</Label>
+            <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Price Type</Label>
             <Select value={priceType} onValueChange={setPriceType}>
               <SelectTrigger
                 className={`${
@@ -55,16 +55,16 @@ export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProp
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className={`${isDarkMode ? "bg-slate-600 border-slate-500" : "bg-white border-gray-300"}`}>
-                <SelectItem value="selling">Giá bán</SelectItem>
-                <SelectItem value="listing">Giá niêm yết</SelectItem>
-                <SelectItem value="cost">Giá gốc</SelectItem>
+                <SelectItem value="selling">Selling Price</SelectItem>
+                <SelectItem value="listing">Listing Price</SelectItem>
+                <SelectItem value="cost">Original Price</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
             <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>
-              Đơn vị tiền tệ
+              Currency
             </Label>
             <Select value={currency} onValueChange={setCurrency}>
               <SelectTrigger
@@ -84,12 +84,12 @@ export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProp
 
         {/* New Price Input */}
         <div>
-          <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>Giá mới</Label>
+          <Label className={`text-sm font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>New Price</Label>
           <Input
             type="text"
             value={newPrice}
             onChange={(e) => setNewPrice(e.target.value)}
-            placeholder="Nhập giá mới"
+            placeholder="Enter new price"
             className={`${
               isDarkMode
                 ? "bg-slate-600 border-slate-500 text-slate-100 placeholder-slate-400"
@@ -100,18 +100,18 @@ export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProp
 
         {/* Price Preview */}
         <div className={`p-4 rounded-lg ${isDarkMode ? "bg-slate-600" : "bg-gray-50"}`}>
-          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"} mb-2`}>Xem trước giá:</div>
+          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"} mb-2`}>Price Preview:</div>
           <div className={`text-lg font-bold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
-            Giá hiện tại: {formatPrice(unit.price, "VND")}
+            Current Price: {formatPrice(unit.price, "VND")}
           </div>
-          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>Giá USD: {unit.priceUSD}</div>
+          <div className={`text-sm ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>USD Price: {unit.priceUSD}</div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex gap-3 pt-4">
           <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" onClick={() => console.log("Save price")}>
             <TrendingUp className="w-4 h-4 mr-2" />
-            Lưu giá
+            Save Price
           </Button>
           <Button
             variant="outline"
@@ -122,7 +122,7 @@ export function PriceManagement({ unit, theme, isDarkMode }: PriceManagementProp
             }`}
             onClick={() => setNewPrice(unit.price.replace(/[^\d]/g, ""))}
           >
-            Hủy
+            Cancel
           </Button>
         </div>
       </CardContent>
