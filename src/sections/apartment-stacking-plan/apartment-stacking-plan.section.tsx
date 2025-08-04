@@ -6,6 +6,7 @@ import dynamic from "next/dynamic"
 import { BlockSlider, LoadingSkeleton, UnitCard } from "./components"
 import { useApartmentData } from "./hooks/use-partment-data"
 import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, TooltipProvider } from "@/components"
+import { UploadModal } from "../upload-excel"
 
 interface ApartmentUnit {
   code: string
@@ -138,6 +139,7 @@ export function ApartmentStackingPlan() {
   const [viewMode, setViewMode] = useState<"grid" | "list" | "excel">("excel")
   const [priceType, setPriceType] = useState("vnd")
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Use the new apartment data hook
   const {
@@ -501,6 +503,7 @@ export function ApartmentStackingPlan() {
               {/* Right Side - Import/Export */}
               <div className="flex items-center gap-2">
                 <Button
+                  onClick={() => setIsModalOpen(true)}
                   variant="outline"
                   size="sm"
                   className={`${isDarkMode ? "bg-slate-700 border-slate-600 hover:bg-slate-600" : "bg-white border-gray-300 hover:bg-gray-50"} text-sm shadow-sm h-8 px-3`}
@@ -817,6 +820,7 @@ export function ApartmentStackingPlan() {
           </div>
         </div>
       </div>
+      <UploadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </TooltipProvider>
   )
 }
