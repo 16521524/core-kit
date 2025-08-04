@@ -111,3 +111,11 @@ The compiled files will be output to the `dist/` directory (ESM, CJS, and `.d.ts
 * **License:** [MIT](LICENSE)
 * **Author:** [warjamma](https://warjamma.com) – [5lgold141@gmail.com]()
 * **GitHub Repository:** [real-estate-core-ui](https://github.com/16521524/real-estate-core-ui)
+
+## **Npm package **
+```
+npm version patch
+npm run build
+npm publish
+
+```
