@@ -1,15 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { TooltipProvider } from "@/components/ui/tooltip"
 import { Grid, List, Table, Upload, Download, Sun, Moon } from "lucide-react"
 import dynamic from "next/dynamic"
-import { BlockSlider } from "../block-slider"
-import { LoadingSkeleton } from "../loading-skeleton"
-import { UnitCard } from "../unit-card"
+import { BlockSlider, LoadingSkeleton, UnitCard } from "./components"
 import { useApartmentData } from "./hooks/use-partment-data"
+import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, TooltipProvider } from "@/components"
 
 interface ApartmentUnit {
   code: string
