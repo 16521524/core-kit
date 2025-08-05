@@ -1011,7 +1011,7 @@ export function ApartmentStackingPlan() {
                   <Checkbox
                     checked={selectedUnits.length === allUnits.length}
                     onCheckedChange={(checked) =>
-                      setSelectedUnits(checked ? allUnits : [])
+                      setSelectedUnits((checked ? allUnits : [] as any))
                     }
                     className={`
                     w-4 h-4 rounded border
