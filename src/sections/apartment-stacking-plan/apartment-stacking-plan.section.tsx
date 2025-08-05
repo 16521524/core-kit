@@ -1,12 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Grid, List, Table, Upload, Download, Sun, Moon } from "lucide-react";
+import {
+  Grid,
+  List,
+  Table,
+  Upload,
+  Download,
+  Sun,
+  Moon,
+  Check,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import { BlockSlider, LoadingSkeleton, UnitCard } from "./components";
 import { useApartmentData } from "./hooks/use-partment-data";
 import {
   Button,
+  Checkbox,
   Select,
   SelectContent,
   SelectItem,
@@ -16,6 +26,7 @@ import {
 } from "@/components";
 import { UploadModal } from "../upload-excel";
 import { useTheme } from "next-themes";
+import { ApproveModal } from "../confirm-modal";
 
 interface ApartmentUnit {
   code: string;
@@ -154,6 +165,7 @@ export function ApartmentStackingPlan() {
   const [viewMode, setViewMode] = useState<"grid" | "list" | "excel">("excel");
   const [priceType, setPriceType] = useState("vnd");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenConfirm, setIsModalOpenConfirm] = useState(false);
 
   // Use the new apartment data hook
   const {
@@ -170,6 +182,9 @@ export function ApartmentStackingPlan() {
     selectedBlockId,
     setSelectedProjectId,
     setSelectedBlockId,
+    handleToggleUnit,
+    selectedUnits,
+    setSelectedUnits,
   } = useApartmentData();
 
   // Add debug logging
@@ -182,6 +197,8 @@ export function ApartmentStackingPlan() {
   console.log("- loading:", loading);
   console.log("- selectedProjectId:", selectedProjectId);
   console.log("- selectedBlockId:", selectedBlockId);
+
+  const allUnits = filteredData.flatMap((f) => f.units).filter(Boolean);
 
   // Simplified block selection - just track index
   const [selectedBlockIndex, setSelectedBlockIndex] = useState(0);
@@ -678,6 +695,21 @@ export function ApartmentStackingPlan() {
                   <Download className="w-3.5 h-3.5 mr-1.5" />
                   Export
                 </Button>
+                {selectedUnits?.length > 0 && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={`${
+                      theme === "dark"
+                        ? "bg-slate-700 border-slate-600 hover:bg-slate-600"
+                        : "bg-white border-gray-300 hover:bg-gray-50"
+                    } text-sm shadow-sm h-8 px-3`}
+                    onClick={() => setIsModalOpenConfirm(true)}
+                  >
+                    <Check className="w-3.5 h-3.5 mr-1.5" />
+                    Check ({selectedUnits.length})
+                  </Button>
+                )}
               </div>
             </div>
           )}
@@ -975,13 +1007,28 @@ export function ApartmentStackingPlan() {
               <div
                 className={`grid grid-cols-12 gap-4 text-sm font-medium ${currentTheme.textMuted}`}
               >
-                <div className="col-span-2">Unit Code</div>
+                <div className="col-span-3 flex items-center gap-3">
+                  <Checkbox
+                    checked={selectedUnits.length === allUnits.length}
+                    onCheckedChange={(checked) =>
+                      setSelectedUnits(checked ? allUnits : [])
+                    }
+                    className={`
+                    w-4 h-4 rounded border
+                    border-gray-300 dark:border-slate-700
+                    transition-colors
+                    data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600
+                    dark:data-[state=checked]:bg-emerald-500 dark:data-[state=checked]:border-emerald-500
+                  `}
+                  />
+                  <span>Unit Code</span>
+                </div>
                 <div className="col-span-1 text-right">Price</div>
                 <div className="col-span-1 text-center">Floor</div>
                 <div className="col-span-2 text-center">Area</div>
                 <div className="col-span-2 text-center">Status</div>
                 <div className="col-span-2 text-center">View</div>
-                <div className="col-span-2 text-center">Actions</div>
+                <div className="col-span-1 text-center">Actions</div>
               </div>
             </div>
 
@@ -999,6 +1046,10 @@ export function ApartmentStackingPlan() {
                       priceType={priceType}
                       statusLabels={statusLabels}
                       viewMode="list"
+                      isSelected={selectedUnits.some(
+                        (u) => u.code === unit.code
+                      )}
+                      onSelect={handleToggleUnit}
                     />
                   ))
               )}
@@ -1085,6 +1136,19 @@ export function ApartmentStackingPlan() {
         onClose={() => setIsModalOpen(false)}
         theme={currentTheme}
         isDarkMode={theme === "dark"}
+      />
+      <ApproveModal
+        open={isModalOpenConfirm}
+        units={selectedUnits}
+        onClose={() => setIsModalOpenConfirm(false)}
+        onApprove={() => {
+          console.log(
+            "✔ Approved units:",
+            selectedUnits.map((u) => u.code)
+          );
+          setIsModalOpenConfirm(false);
+          setSelectedUnits([]);
+        }}
       />
     </TooltipProvider>
   );

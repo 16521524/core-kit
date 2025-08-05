@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useApiData } from "../use-api-data"
 import { useExchangeRate } from "../use-exchange-rate"
 
@@ -105,6 +105,16 @@ export function useApartmentData() {
     setSelectedProjectId,
     setSelectedBlockId,
   } = useApiData()
+
+  const [selectedUnits, setSelectedUnits] = useState<ApartmentUnit[]>([])
+
+  const handleToggleUnit = (unit: ApartmentUnit) => {
+    setSelectedUnits(prev => {
+      const exists = prev.some(u => u.code === unit.code)
+      if (exists) return prev.filter(u => u.code !== unit.code)
+      return [...prev, unit]
+    })
+  }
 
   const exchangeRate = useExchangeRate("VND", "USD")
 
@@ -284,5 +294,8 @@ export function useApartmentData() {
     selectedBlockId,
     setSelectedProjectId,
     setSelectedBlockId,
+    handleToggleUnit,
+    selectedUnits,
+    setSelectedUnits,
   }
 }
