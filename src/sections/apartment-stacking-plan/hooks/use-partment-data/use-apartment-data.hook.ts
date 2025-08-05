@@ -216,12 +216,14 @@ export function useApartmentData() {
       }
 
       // Create floors array (ASCENDING ORDER: 1, 2, 3... 15)
-      const sortedFloors = [...blockMetadata.floors].sort((a, b) => {
-        const aNum = getFloorNumber(a)
-        const bNum = getFloorNumber(b)
-        return aNum - bNum // ASCENDING order (1 → 15)
-      })
+      // const sortedFloors = [...blockMetadata.floors].sort((a, b) => {
+      //   const aNum = getFloorNumber(a)
+      //   const bNum = getFloorNumber(b)
+      //   return aNum - bNum // ASCENDING order (1 → 15)
+      // })
 
+      const sortedFloors = blockMetadata.floors;
+      
       console.log("📊 Sorted floors (ascending):", sortedFloors)
 
       floors = sortedFloors.map((floorString) => {
