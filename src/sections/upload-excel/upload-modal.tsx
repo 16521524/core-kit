@@ -7,18 +7,18 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Loader2, CheckCircle, XCircle, AlertCircle, UploadCloud, Check, Download, X } from "lucide-react" // Import X
-import Papa from "papaparse"
+import { Loader2, CheckCircle, XCircle, AlertCircle, UploadCloud, Check, Download, X } from "lucide-react"
+import * as XLSX from "xlsx"
+import { priceSchema, spcodeSchema, schema as metadataSchema } from "./lib"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "@/components/ui/use-toast"
-import { priceSchema, spcodeSchema, schema as metadataSchema } from "./lib"
 
 // Map upload types to their local public paths
 const localTemplatePaths: Record<string, string> = {
-  metadata: "/templates/StackingPlan_Metadata(listings_listing_202210281020).csv",
-  price: "/templates/StackingPlan_Price(listings_listing_202210281020).csv",
-  spcode: "/templates/StackingPlan_SPCode(Items).csv",
+  metadata: "/templates/StackingPlan_Metadata.xlsx",
+  price: "/templates/StackingPlan_Price.xlsx",
+  spcode: "/templates/StackingPlan_SPCode.xlsx",
 }
 
 type UploadStep = "upload" | "confirm" | "success" | "error" // Simplified steps
@@ -111,65 +111,55 @@ export function UploadModal({ isOpen, onClose }: UploadModalProps) {
     setUploadError(null)
 
     try {
-      Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        // Bỏ qua hàng đầu tiên (title)
-        beforeFirstRow: (rows: string[][]) => {
-          if (rows.length > 0) {
-            rows.splice(0, 1) // Bỏ qua hàng đầu tiên
-          }
-          return rows // Trả về dữ liệu đã được điều chỉnh
-        },
-        complete: async (results) => {
-          // Made complete async
-          console.log("Raw PapaParse results:", results)
+      const reader = new FileReader()
 
-          if (results.errors.length > 0) {
-            console.error("PapaParse errors:", results.errors)
-            setUploadError(`Parsing error: ${results.errors[0].message}`)
-            setIsLoading(false)
-            setUploadStep("error")
-            return
-          }
+      reader.onload = async (e) => {
+        try {
+          const data = new Uint8Array(e.target?.result as ArrayBuffer)
+          const workbook = XLSX.read(data, { type: "array" })
+          const sheetName = workbook.SheetNames[0]
+          const worksheet = workbook.Sheets[sheetName]
 
-          const filteredData = results.data.filter((row) =>
+          // Convert sheet to JSON, using the first row as headers
+          const rawJsonData = XLSX.utils.sheet_to_json(worksheet, { header: true })
+
+          // Filter out empty rows (if any)
+          const filteredData = rawJsonData.filter((row: any) =>
             Object.values(row).some((val) => val !== null && val !== undefined && String(val).trim() !== ""),
           )
 
           if (filteredData.length === 0) {
-            setUploadError("CSV file contains no data or is incorrectly formatted.")
+            setUploadError("Excel file contains no data or is incorrectly formatted.")
             setIsLoading(false)
             setUploadStep("error")
             return
           }
 
-          const data: ParsedRow[] = filteredData.map((row: any) => {
+          const mappedData: ParsedRow[] = filteredData.map((row: any) => {
             const newRow: ParsedRow = {}
             currentSchema.forEach((col) => {
-              // Use currentSchema here
-              const normalizedSchemaName = normalizeString(col.name)
-              const foundKey = Object.keys(row).find((key) => normalizeString(key) === normalizedSchemaName)
-              newRow[col.name] = row[foundKey || col.name] || ""
+              // Find the key in the raw row that matches the normalized schema name
+              const foundKey = Object.keys(row).find((key) => normalizeString(key) === normalizeString(col.name))
+              newRow[col.name] = row[foundKey || col.name] || "" // Use col.name for display in table
             })
             return newRow
           })
 
-          console.log("Mapped data after filtering:", data)
+          console.log("Mapped data after XLSX parsing:", mappedData)
 
-          if (data.length === 0) {
-            setUploadError("CSV file contains no data after mapping or is incorrectly formatted.")
+          if (mappedData.length === 0) {
+            setUploadError("Excel file contains no data after mapping or is incorrectly formatted.")
             setIsLoading(false)
             setUploadStep("error")
             return
           }
 
-          setParsedData(data)
+          setParsedData(mappedData)
 
-          // Simulate backend check and return record statuses immediately after parsing
+          // Simulate backend check and return record statuses
           await new Promise((resolve) => setTimeout(resolve, 1500)) // Simulate API call
 
-          const simulatedStatuses: ("Success" | "Error" | "Warning")[] = data.map((_, index) => {
+          const simulatedStatuses: ("Success" | "Error" | "Warning")[] = mappedData.map((_, index) => {
             if (index % 7 === 0) return "Error" // Simulate some errors
             if (index % 5 === 0) return "Warning" // Simulate some warnings
             return "Success"
@@ -177,21 +167,29 @@ export function UploadModal({ isOpen, onClose }: UploadModalProps) {
           setRecordStatuses(simulatedStatuses)
           setIsLoading(false)
           setUploadStep("confirm") // Go directly to confirm/preview step
-        },
-        error: (error) => {
-          console.error("PapaParse error:", error)
-          setUploadError(`Error parsing file: ${error.message}`)
+        } catch (parseError: any) {
+          console.error("XLSX parsing error:", parseError)
+          setUploadError(`Error parsing Excel file: ${parseError.message}`)
           setIsLoading(false)
           setUploadStep("error")
-        },
-      })
+        }
+      }
+
+      reader.onerror = (error) => {
+        console.error("FileReader error:", error)
+        setUploadError(`Error reading file: ${error.message}`)
+        setIsLoading(false)
+        setUploadStep("error")
+      }
+
+      reader.readAsArrayBuffer(file) // Read the file as ArrayBuffer for XLSX.read
     } catch (error: any) {
-      console.error("File processing error:", error)
-      setUploadError(`File processing error: ${error.message}`)
+      console.error("File processing initiation error:", error)
+      setUploadError(`File processing initiation error: ${error.message}`)
       setIsLoading(false)
       setUploadStep("error")
     }
-  }, [file, currentSchema]) // Add currentSchema to dependencies
+  }, [file, currentSchema])
 
   const handleConfirm = useCallback(async () => {
     setIsLoading(true)
@@ -254,20 +252,14 @@ export function UploadModal({ isOpen, onClose }: UploadModalProps) {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      const csvContent = await response.text()
+      const fileContent = await response.blob() // Fetch as blob for XLSX
 
-      // Add BOM for UTF-8 compatibility in Excel if not already present
-      // const finalCsvContent = csvContent.startsWith("\ufeff") ? csvContent : "\ufeff" + csvContent
-
-      let finalCsvContent = csvContent.startsWith("\ufeff") ? csvContent : "\ufeff" + csvContent
-
-      // Replace delimiter from ',' to ';' for Excel in Vietnamese locale
-      finalCsvContent = finalCsvContent.replace(/,/g, ";")
-
-      const blob = new Blob([finalCsvContent], { type: "text/csv;charset=utf-8;" })
+      const blob = new Blob([fileContent], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      }) // Changed MIME type
       const link = document.createElement("a")
       link.href = URL.createObjectURL(blob)
-      link.setAttribute("download", `StackingPlan_${uploadType}_Template.csv`) // Dynamic filename
+      link.setAttribute("download", `StackingPlan_${uploadType}_Template.xlsx`) // Changed filename extension
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -382,13 +374,13 @@ export function UploadModal({ isOpen, onClose }: UploadModalProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="file" className="text-base font-medium">
-                Excel/CSV File
+                Excel File
               </Label>
               <div className="relative flex">
                 <Input
                   id="file"
                   type="file"
-                  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" // Chỉ chấp nhận .xlsx
                   onChange={handleFileChange}
                   className="absolute inset-0 opacity-0 cursor-pointer z-10"
                   ref={fileInputRef} // Attach the ref here
