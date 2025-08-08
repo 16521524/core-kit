@@ -25,9 +25,9 @@ Optimized for building fast, scalable web applications—especially dashboards a
 ### 1. Install the package
 
 ```
-yarn add core-kit
+yarn add @core-kit/core-ui
 # or
-npm install core-kit
+npm install @core-kit/core-ui
 
 ```
 
@@ -53,7 +53,7 @@ Add the library to your Tailwind content paths so its styles are detected:
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/core-kit/**/*.{js,jsx,ts,tsx}"
+    "./node_modules/@core-kit/core-ui/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {},

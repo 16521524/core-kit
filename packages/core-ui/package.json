@@ -1,5 +1,5 @@
 {
-  "name": "core-kit",
+  "name": "@core-kit/core-ui",
   "author": {
     "name": "warjamma",
     "email": "5lgold141@gmail.com",
@@ -11,12 +11,22 @@
   },
   "description": "Corekit",
   "main": "./dist/exports.js",
+  "module": "./dist/exports.mjs",
+  "types": "./dist/exports.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
-    ".": "./dist/exports.js",
-    "./client": "./dist/export-client.js",
+    ".": {
+      "require": "./dist/exports.js",
+      "import": "./dist/exports.mjs",
+      "types": "./dist/exports.d.ts"
+    },
+    "./client": {
+      "require": "./dist/export-client.js",
+      "import": "./dist/export-client.mjs",
+      "types": "./dist/export-client.d.ts"
+    },
     "./styles/styles.css": "./dist/styles/styles.css"
   },
   "scripts": {
