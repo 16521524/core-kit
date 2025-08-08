@@ -20,9 +20,11 @@
     "./styles/styles.css": "./dist/styles/styles.css"
   },
   "scripts": {
+    "dev": "next dev",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",
+    "lint": "next lint",
     "next:lint": "next lint",
     "build:css": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles/styles.css --minify",
     "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && yarn build:css",
