@@ -1,5 +1,5 @@
 {
-  "name": "real-estate-core-ui",
+  "name": "core-kit",
   "author": {
     "name": "warjamma",
     "email": "5lgold141@gmail.com",
@@ -108,11 +108,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/16521524/real-estate-core-ui.git"
+    "url": "https://github.com/16521524/core-kit.git"
   },
-  "homepage": "https://github.com/16521524/real-estate-core-ui#readme",
+  "homepage": "https://github.com/16521524/core-kit#readme",
   "bugs": {
-    "url": "https://github.com/16521524/real-estate-core-ui/issues"
+    "url": "https://github.com/16521524/core-kit/issues"
   },
   "license": "MIT",
   "engines": {

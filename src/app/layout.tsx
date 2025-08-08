@@ -9,9 +9,9 @@ import '../styles/styles.css'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'real-estate-core-ui',
-  description: 'real-estate-core-ui',
-  generator: 'real-estate-core-ui',
+  title: 'core-kit',
+  description: 'core-kit',
+  generator: 'core-kit',
 }
 export default function RootLayout({
   children,

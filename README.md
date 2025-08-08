@@ -25,9 +25,9 @@ Optimized for building fast, scalable web applications—especially dashboards a
 ### 1. Install the package
 
 ```
-yarn add real-estate-core-ui
+yarn add core-kit
 # or
-npm install real-estate-core-ui
+npm install core-kit
 
 ```
 
@@ -53,7 +53,7 @@ Add the library to your Tailwind content paths so its styles are detected:
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/real-estate-core-ui/**/*.{js,jsx,ts,tsx}"
+    "./node_modules/core-kit/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {},
@@ -88,8 +88,8 @@ import './index.css';
 ### Run the project locally
 
 ```
-git clone https://github.com/16521524/real-estate-core-ui.git
-cd real-estate-core-ui
+git clone https://github.com/16521524/core-kit.git
+cd core-kit
 yarn install
 yarn next dev
 
@@ -110,7 +110,7 @@ The compiled files will be output to the `dist/` directory (ESM, CJS, and `.d.ts
 
 * **License:** [MIT](LICENSE)
 * **Author:** [warjamma](https://warjamma.com) – [5lgold141@gmail.com]()
-* **GitHub Repository:** [real-estate-core-ui](https://github.com/16521524/real-estate-core-ui)
+* **GitHub Repository:** [core-kit](https://github.com/16521524/core-kit)
 
 ## **Npm package **
 
