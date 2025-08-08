@@ -1,0 +1,81 @@
+{
+  "name": "@core-kit/core-utilities",
+  "author": {
+    "name": "warjamma",
+    "email": "5lgold141@gmail.com",
+    "url": "https://warjamma.com"
+  },
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Corekit",
+  "main": "./dist/exports.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/exports.js",
+    "./client": "./dist/export-client.js"
+  },
+  "scripts": {
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
+    "next:lint": "next lint",
+    "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom",
+    "prepublishOnly": "yarn build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.3.16",
+    "add": "^2.0.6",
+    "axios": "^1.11.0",
+    "clsx": "^2.1.1",
+    "cmdk": "1.0.4",
+    "cookies-next": "^6.1.0",
+    "date-fns": "4.1.0",
+    "dayjs": "^1.11.13",
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.4",
+    "geist": "^1.3.1",
+    "jwt-decode": "^4.0.0",
+    "next": "15.2.4",
+    "papaparse": "^5.5.3",
+    "pg": "^8.16.3",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-toastify": "^11.0.5",
+    "secure-ls": "^2.0.0",
+    "yarn": "^1.22.22",
+    "zustand": "^5.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8.5",
+    "tailwindcss": "^3.4.17",
+    "tsup": "^8.5.0",
+    "typescript": "^5"
+  },
+  "keywords": [
+    "react",
+    "design-system"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/16521524/core-kit.git"
+  },
+  "homepage": "https://github.com/16521524/core-kit#readme",
+  "bugs": {
+    "url": "https://github.com/16521524/core-kit/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

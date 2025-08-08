@@ -1,0 +1,11 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
+const PUBLIC_API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const DEFAULT_TIMEZONE = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE ?? 'Europe/London';
+const ENABLED_CAPTCHA = process.env.NEXT_PUBLIC_ENABLED_CAPTCHA === 'true';
+const CDN_COMMON = process.env.NEXT_PUBLIC_CDN_COMMON ?? '';
+
+export { API_ENDPOINT, BASE_URL_API, CDN_COMMON, DEFAULT_TIMEZONE, ENABLED_CAPTCHA, PUBLIC_API_ENDPOINT };
