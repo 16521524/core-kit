@@ -1,5 +1,5 @@
 {
-  "name": "core-kit-monorepo",
+  "name": "core-kit",
   "private": true,
   "workspaces": [
     "packages/*",
