@@ -8,6 +8,8 @@ A core UI component library for ERP Next applications.
 npm install @erp-next/ui
 # or
 yarn add @erp-next/ui
+# or
+yarn add @erp-next/frappe-ui
 ```
 
 ## Usage

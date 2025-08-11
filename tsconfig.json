@@ -3,6 +3,7 @@
   "files": [],
   "references": [
     { "path": "./packages/core-ui" },
-    { "path": "./packages/core-utilities" }
+    { "path": "./packages/core-utilities" },
+    { "path": "./packages/core-frappe-ui" }
   ]
 }

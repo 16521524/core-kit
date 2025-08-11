@@ -12,8 +12,8 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "yarn workspace @erp-next/ui build && yarn workspace @erp-next/utilities build",
-    "build:debug": "yarn workspace @erp-next/ui build:debug && yarn workspace @erp-next/utilities build:debug",
+    "build": "yarn workspace @erp-next/ui build && yarn workspace @erp-next/utilities build && yarn workspace @erp-next/frappe-ui build",
+    "build:debug": "yarn workspace @erp-next/ui build:debug && yarn workspace @erp-next/utilities build:debug && yarn workspace @erp-next/frappe-ui build:debug",
     "dev": "yarn workspaces foreach -p run dev",
     "lint": "yarn workspaces foreach run lint",
     "release": "changeset",
