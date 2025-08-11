@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/erp-next.git"
+    "url": "https://github.com/16521524/erp-next.git"
   },
   "devDependencies": {
     "@changesets/cli": "^2",
