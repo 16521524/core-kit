@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "incremental": false,
+
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
+
+//Version 01
+
+// {
+//   "extends": "./tsconfig.json",
+//   "compilerOptions": {
+//     "incremental": false,              
+//     "declaration": true,
+//     "emitDeclarationOnly": true,
+//     "noEmit": false
+//   }
+// }

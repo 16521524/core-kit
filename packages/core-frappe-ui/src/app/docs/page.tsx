@@ -1,0 +1,30 @@
+export default async function DocsPage() {
+  return (
+    <div className="prose dark:prose-invert">
+      ``` # Welcome to Frappe UI React Welcome to the official documentation for
+      Frappe UI React - a comprehensive React component library implementing
+      Frappe's Espresso UI design system. This library provides a collection of
+      high-quality, accessible components for both web and React Native
+      platforms. ## Getting Started Choose your platform to get started: -
+      [React Components](/docs/web/getting-started) - [React Native
+      Components](/docs/native/getting-started) Each component page includes: -
+      Installation instructions - Usage examples with live previews - Props
+      documentation - Variants and customization options ## Key Features - 100%
+      Shadcn CLI compatible - Implements Frappe's Espresso UI design system -
+      Cross-platform support (Web and React Native) - Fully typed with
+      TypeScript - Accessible and responsive components - Comprehensive
+      documentation ## Available Components Our library includes essential UI
+      components like: - Buttons and Button Groups - Form elements (Input,
+      Dropdown) - Typography and Icons - Layout components - Avatar and Badge -
+      And many more... ## Need Help? If you need additional help: - Visit our
+      [GitHub repository](https://github.com/timelessco/frappe-ui-react) - Join
+      our community discussions - Raise an issue for bugs or feature requests ``
+    </div>
+  );
+}
+
+export const generateMetadata = async () => {
+  return {
+    title: "Docs",
+  };
+};
