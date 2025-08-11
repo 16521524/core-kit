@@ -1,5 +1,5 @@
 {
-  "name": "@core-kit/core-utilities",
+  "name": "@erp-next/utilities",
   "author": {
     "name": "warjamma",
     "email": "5lgold141@gmail.com",
@@ -18,14 +18,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/exports.d.ts",
       "require": "./dist/exports.js",
-      "import": "./dist/exports.mjs",
-      "types": "./dist/exports.d.ts"
+      "import": "./dist/exports.mjs"
     },
     "./client": {
+      "types": "./dist/export-client.d.ts",
       "require": "./dist/export-client.js",
-      "import": "./dist/export-client.mjs",
-      "types": "./dist/export-client.d.ts"
+      "import": "./dist/export-client.mjs"
     }
   },
   "scripts": {
@@ -34,6 +34,7 @@
     "next:start": "next start",
     "next:lint": "next lint",
     "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom",
+    "build:debug": "tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom --watch",
     "prepublishOnly": "yarn build",
     "lint": "next lint"
   },
@@ -79,11 +80,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/16521524/core-kit.git"
+    "url": "https://github.com/16521524/erp-next.git"
   },
-  "homepage": "https://github.com/16521524/core-kit#readme",
+  "homepage": "https://github.com/16521524/erp-next#readme",
   "bugs": {
-    "url": "https://github.com/16521524/core-kit/issues"
+    "url": "https://github.com/16521524/erp-next/issues"
   },
   "license": "MIT",
   "engines": {

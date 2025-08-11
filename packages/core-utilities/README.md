@@ -25,9 +25,9 @@ Optimized for building fast, scalable web applications—especially dashboards a
 ### 1. Install the package
 
 ```
-yarn add @core-kit/core-utilities
+yarn add @erp-next/core-utilities
 # or
-npm install @core-kit/core-utilities
+npm install @erp-next/core-utilities
 
 ```
 
@@ -53,7 +53,7 @@ Add the library to your Tailwind content paths so its styles are detected:
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@core-kit/core-utilities/**/*.{js,jsx,ts,tsx}"
+    "./node_modules/@erp-next/core-utilities/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {},
@@ -88,8 +88,8 @@ import './index.css';
 ### Run the project locally
 
 ```
-git clone https://github.com/16521524/core-kit.git
-cd core-kit
+git clone https://github.com/16521524/erp-next.git
+cd erp-next
 yarn install
 yarn next dev
 
@@ -110,7 +110,7 @@ The compiled files will be output to the `dist/` directory (ESM, CJS, and `.d.ts
 
 * **License:** [MIT](LICENSE)
 * **Author:** [warjamma](https://warjamma.com) – [5lgold141@gmail.com]()
-* **GitHub Repository:** [core-kit](https://github.com/16521524/core-kit)
+* **GitHub Repository:** [erp-next](https://github.com/16521524/erp-next)
 
 ## **Npm package **
 

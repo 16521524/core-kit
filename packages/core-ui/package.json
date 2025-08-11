@@ -1,5 +1,5 @@
 {
-  "name": "@core-kit/core-ui",
+  "name": "@erp-next/ui",
   "author": {
     "name": "warjamma",
     "email": "5lgold141@gmail.com",
@@ -18,27 +18,27 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/exports.d.ts",
       "require": "./dist/exports.js",
-      "import": "./dist/exports.mjs",
-      "types": "./dist/exports.d.ts"
+      "import": "./dist/exports.mjs"
     },
     "./client": {
+      "types": "./dist/export-client.d.ts",
       "require": "./dist/export-client.js",
-      "import": "./dist/export-client.mjs",
-      "types": "./dist/export-client.d.ts"
+      "import": "./dist/export-client.mjs"
     },
     "./styles/styles.css": "./dist/styles/styles.css"
   },
   "scripts": {
-    "dev": "next dev",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",
-    "lint": "next lint",
     "next:lint": "next lint",
     "build:css": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles/styles.css --minify",
     "build": "rm -rf dist && tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && yarn build:css",
-    "prepublishOnly": "yarn build"
+    "build:debug": "tsup src/exports.ts --format esm,cjs --dts --minify --tsconfig tsconfig.tsup.json --external react,react-dom && yarn build:css --watch",
+    "prepublishOnly": "yarn build",
+    "lint": "next lint"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
@@ -120,11 +120,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/16521524/core-kit.git"
+    "url": "https://github.com/16521524/erp-next.git"
   },
-  "homepage": "https://github.com/16521524/core-kit#readme",
+  "homepage": "https://github.com/16521524/erp-next#readme",
   "bugs": {
-    "url": "https://github.com/16521524/core-kit/issues"
+    "url": "https://github.com/16521524/erp-next/issues"
   },
   "license": "MIT",
   "engines": {

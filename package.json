@@ -1,5 +1,10 @@
 {
-  "name": "core-kit",
+  "name": "@erp-next/root",
+  "author": {
+    "name": "warjamma",
+    "email": "5lgold141@gmail.com",
+    "url": "https://warjamma.com"
+  },
   "private": true,
   "workspaces": [
     "packages/*",
@@ -7,12 +12,20 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -A run build",
-    "dev": "yarn workspaces foreach -Ap run dev",
-    "lint": "yarn workspaces foreach -A run lint",
+    "build": "yarn workspace @erp-next/ui build && yarn workspace @erp-next/utilities build",
+    "build:debug": "yarn workspace @erp-next/ui build:debug && yarn workspace @erp-next/utilities build:debug",
+    "dev": "yarn workspaces foreach -p run dev",
+    "lint": "yarn workspaces foreach run lint",
     "release": "changeset",
     "version-packages": "changeset version && yarn install && yarn build",
     "publish-packages": "changeset publish"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/erp-next.git"
   },
   "devDependencies": {
     "@changesets/cli": "^2",
